@@ -1,0 +1,103 @@
+pspice_to_kicad.list:
+  path: '/pspice-to-kicad/list'
+  defaults:
+    _controller: '\Drupal\pspice_to_kicad\Controller\DefaultController::pspice_to_kicad_view'
+    _title: 'List of converted files from PSPICE to KICAD'
+  requirements:
+    _permission: 'access pspice_to_kicad'
+  options:
+    no_cache: TRUE
+
+pspice_to_kicad.description:
+  path: '/pspice-to-kicad/description/{id}'
+  defaults:
+    _controller: '\Drupal\pspice_to_kicad\Controller\DefaultController::pspice_to_kicad_get_description'
+    _title: 'More Details'
+  requirements:
+    _permission: 'access pspice_to_kicad'
+  options:
+    no_cache: TRUE
+
+pspice_to_kicad.add:
+  path: '/pspice-to-kicad/add'
+  defaults:
+    _form: '\Drupal\pspice_to_kicad\Form\PspiceToKicadAddForm'
+    _title: 'Upload files for PSPICE to KICAD convert'
+  requirements:
+    _permission: 'manage pspice_to_kicad'
+
+pspice_to_kicad.your_upload:
+  path: '/pspice-to-kicad/your-upload'
+  defaults:
+    _controller: '\Drupal\pspice_to_kicad\Controller\DefaultController::pspice_to_kicad_your_uploaded_file'
+  requirements:
+    _permission: 'manage pspice_to_kicad'
+  options:
+    no_cache: TRUE
+pspice_to_kicad.convert_list:
+  path: '/pspice-to-kicad/convert'
+  defaults:
+    _controller: '\Drupal\pspice_to_kicad\Controller\DefaultController::pspice_to_kicad_remain_list'
+    _title: 'Files to Be Converted'
+  requirements:
+    _permission: 'convert pspice_to_kicad'
+  options:
+    no_cache: TRUE
+pspice_to_kicad.download_file:
+  path: '/pspice-to-kicad/download/file/{id}'
+  defaults:
+    _controller: '\Drupal\pspice_to_kicad\Controller\DefaultController::pspice_to_kicad_download_file'
+  requirements:
+    _permission: 'access pspice_to_kicad'
+  options:
+    no_cache: TRUE
+pspice_to_kicad.download_pdf:
+  path: '/pspice-to-kicad/download/pdf/{id}'
+  defaults:
+    _controller: '\Drupal\pspice_to_kicad\Controller\DefaultController::pspice_to_kicad_download_pdf_file'
+  requirements:
+    _permission: 'access pspice_to_kicad'
+  options:
+    no_cache: TRUE
+pspice_to_kicad.delete_file:
+  path: '/pspice-to-kicad/delete/file/{id}'
+  defaults:
+    _form: '\Drupal\pspice_to_kicad\Form\PspiceToKicadDeleteForm'
+    _title: 'Delete File'
+  requirements:
+    _permission: 'delete pspice_to_kicad file'
+
+pspice_to_kicad.convert_upload:
+  path: '/pspice-to-kicad/convert/upload/{id}'
+  defaults:
+    _form: '\Drupal\pspice_to_kicad\Form\PspiceToKicadUploadForm'
+    _title: 'Upload Converted File'
+  requirements:
+    _permission: 'convert pspice_to_kicad'
+
+pspice_to_kicad.settings:
+  path: '/admin/settings/pspice-to-kicad'
+  defaults:
+    _form: '\Drupal\pspice_to_kicad\Form\PspiceToKicadSettingsForm'
+    _title: 'Pspice File Settings'
+  requirements:
+    _permission: 'administer events'
+
+pspice_to_kicad.convert_file:
+  path: '/pspice-to-kicad/convert/file/{id}'
+  defaults:
+    _controller: '\Drupal\pspice_to_kicad\Controller\DefaultController::pspice_to_kicad_convert_file'
+    _title: 'Convert PSPICE file'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: TRUE
+pspice_to_kicad.convert_approved:
+  path: '/pspice-to-kicad/convert/approved/{fileid}'
+  defaults:
+    _controller: '\Drupal\pspice_to_kicad\Controller\DefaultController::pspice_to_kicad_convert_approved'
+    _title: 'Approve Converted File'
+  requirements:
+    _permission: 'convert pspice_to_kicad'
+  options:
+    no_cache: TRUE

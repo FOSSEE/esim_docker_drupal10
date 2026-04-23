@@ -1,0 +1,42 @@
+add announcements_announcement entities:
+  title: 'Create new Announcement entities'
+
+administer announcements:
+  title: 'Administer Announcements Module'
+  description: 'Allow to access the administration form to configure Announcements Module.'
+  restrict access: true
+
+administer announcements_announcement:
+  title: 'Administer Announcement entities'
+  description: 'Allow to access the administration form to configure Announcement entities.'
+  restrict access: true
+
+access announcements_announcement overview:
+  title: 'Access Announcement Overview'
+  description: 'Allow to access the Announcement list.'
+
+delete announcements_announcement entities:
+  title: 'Delete Announcement entities'
+
+edit announcements_announcement entities:
+  title: 'Edit Announcement entities'
+
+view published announcements_announcement entities:
+  title: 'View published Announcement entities'
+
+view unpublished announcements_announcement entities:
+  title: 'View unpublished Announcement entities'
+
+view all announcements_announcement revisions:
+  title: 'View all Announcement revisions'
+
+revert all announcements_announcement revisions:
+  title: 'Revert all Announcement revisions'
+  description: 'Role requires permission <em>view Announcement revisions</em> and <em>edit rights</em> for announcement entities in question or <em>administer announcement entities</em>.'
+
+delete all announcements_announcement revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Announcement revisions</em> and <em>delete rights</em> for announcement entities in question or <em>administer announcement entities</em>.'
+
+permission_callbacks:
+  - \Drupal\announcements\AnnouncementPermissions::generatePermissions

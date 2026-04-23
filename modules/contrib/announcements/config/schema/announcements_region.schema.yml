@@ -1,0 +1,12 @@
+announcements.announcements_region.*:
+  type: config_entity
+  label: 'Announcement Region config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string

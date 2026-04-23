@@ -1,0 +1,22 @@
+# Announcement routing definition
+
+entity.announcements_announcement.canonical:
+  route_name: entity.announcements_announcement.canonical
+  base_route: entity.announcements_announcement.canonical
+  title: 'View'
+
+entity.announcements_announcement.edit_form:
+  route_name: entity.announcements_announcement.edit_form
+  base_route: entity.announcements_announcement.canonical
+  title: 'Edit'
+
+entity.announcements_announcement.version_history:
+  route_name: entity.announcements_announcement.version_history
+  base_route: entity.announcements_announcement.canonical
+  title: 'Revisions'
+
+entity.announcements_announcement.delete_form:
+  route_name:  entity.announcements_announcement.delete_form
+  base_route:  entity.announcements_announcement.canonical
+  title: Delete
+  weight: 10

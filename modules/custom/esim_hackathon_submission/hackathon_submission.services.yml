@@ -1,0 +1,8 @@
+
+services:
+  hackathon_submission_global:
+    class: '\Drupal\hackathon_submission\Services\HackathonSubmissionGlobalFunction'
+
+
+
+  

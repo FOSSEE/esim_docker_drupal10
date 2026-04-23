@@ -1,0 +1,15 @@
+{
+    "name": "drupal/announcements",
+    "description": "Manage site announcement display.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/announcement",
+    "support": {
+      "issues": "https://www.drupal.org/project/issues/announcement",
+      "source": "https://git.drupalcode.org/project/announcement"
+    },
+    "require": {
+      "drupal/core": "^10.1 || ^11 || ^12",
+      "drupal/js_cookie": "^1.0"
+    }
+}

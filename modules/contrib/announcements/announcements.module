@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Contains announcements.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function announcements_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the announcements module.
+    case 'help.page.announcements':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function announcements_theme() {
+  $theme = [];
+  $theme['announcements_announcement'] = [
+    'render element' => 'elements',
+    'file' => 'announcements.page.inc',
+    'template' => 'announcements_announcement',
+  ];
+  $theme['announcements_announcement_content_add_list'] = [
+    'render element' => 'content',
+    'variables' => ['content' => NULL],
+    'file' => 'announcements.page.inc',
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function announcements_theme_suggestions_announcements_announcement(array $variables) {
+  $suggestions = [];
+  $entity = $variables['elements']['#announcements_announcement'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $id = $entity->id();
+  $bundle = $entity->bundle();
+  $style = $entity->get('style')->getString();
+
+  $suggestions[] = 'announcements_announcement__' . $sanitized_view_mode;
+  $suggestions[] = 'announcements_announcement__' . $bundle;
+  $suggestions[] = 'announcements_announcement__' . $style;
+  $suggestions[] = 'announcements_announcement__' . $bundle . '__' . $style;
+  $suggestions[] = 'announcements_announcement__' . $bundle . '__' . $sanitized_view_mode;
+  $suggestions[] = 'announcements_announcement__' . $bundle . '__' . $style . '__' . $sanitized_view_mode;
+  $suggestions[] = 'announcements_announcement__' . $id;
+  $suggestions[] = 'announcements_announcement__' . $id . '__' . $sanitized_view_mode;
+
+  if (isset($variables['region'])) {
+    $region = $variables['region'];
+    $suggestions[] = 'announcements_announcement__' . $region;
+    $suggestions[] = 'announcements_announcement__' . $style . '__' . $region;
+    $suggestions[] = 'announcements_announcement__' . $bundle . '__' . $style . '__' . $region;
+    $suggestions[] = 'announcements_announcement__' . $bundle . '__' . $style . '__' . $region . '__' . $sanitized_view_mode;
+    $suggestions[] = 'announcements_announcement__' . $id . '__' . $region;
+    $suggestions[] = 'announcements_announcement__' . $id . '__' . $region . '__' . $sanitized_view_mode;
+  }
+
+  return $suggestions;
+}

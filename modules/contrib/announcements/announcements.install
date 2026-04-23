@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Contains condition_field.install.
+ */
+
+use Drupal\announcements\Entity\AnnouncementType;
+use Drupal\Core\Extension\ModuleInstallerInterface;
+
+/**
+ * Set Enabled Condition Plugins.
+ */
+function announcements_update_8001(&$sandbox) {
+  $condition_manager = \Drupal::service('plugin.manager.condition');
+  $definitions = $condition_manager->getDefinitions();
+  $enabled_conditions = [];
+  foreach (array_keys($definitions) as $condition_id) {
+    $enabled_conditions[$condition_id] = $condition_id;
+  }
+
+  /** @var \Drupal\announcements\Entity\AnnouncementTypeInterface $types */
+  $types = AnnouncementType::loadMultiple();
+  foreach ($types as $type) {
+    $type->setEnabledConditions($enabled_conditions);
+    $type->save();
+  }
+}
+
+/**
+ * Add js cookie module.
+ */
+function announcements_update_9001(&$sandbox) {
+  if (!\Drupal::moduleHandler()->moduleExists('js_cookie')) {
+    /** @var ModuleInstallerInterface $module_installer */
+    $module_installer = \Drupal::service('module_installer');
+    $module_installer->install(['js_cookie']);
+  }
+}

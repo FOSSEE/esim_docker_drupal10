@@ -1,0 +1,3 @@
+[submodule "eSim_PSpice_to_KiCad_Python_Parser"]
+	path = eSim_PSpice_to_KiCad_Python_Parser
+	url = https://github.com/FOSSEE/eSim_PSpice_to_KiCad_Python_Parser.git

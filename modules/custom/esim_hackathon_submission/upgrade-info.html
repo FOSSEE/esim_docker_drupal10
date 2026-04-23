@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Drupal Module Upgrader analysis report</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,700,600' rel='stylesheet' type='text/css' />
+    <style type="text/css">
+    <!--
+
+body {
+  width: 80%;
+  color: #343434;
+  margin: 1em auto;
+  font-family: 'Open Sans', Verdana, sans-serif;
+}
+
+details {
+  font-size: 18px;
+  line-height: 25px;
+  margin-bottom: 2em;
+  display: list-item;
+  list-style: none;
+}
+
+details summary {
+  padding: 1em;
+  margin-bottom: 1em;
+  display: list-item;
+  cursor: pointer;
+}
+
+details.error summary {
+  background-color: #ffd5d5;
+}
+
+details.warning summary {
+  background-color: #fff3bb;
+}
+
+a {
+  color: #095cb1;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+aside {
+  font-style: italic;
+  line-height: 20px;
+  font-size: 15px;
+}
+
+.group {
+  border: 1px solid #ececec;
+  padding: 1em;
+  display: block;
+}
+
+.group > summary {
+  padding: 0;
+  color: #c8c8c8;
+  margin-bottom: 0;;
+  font-weight: bold;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  display: list-item;
+}
+
+.group[open] > summary {
+  margin-bottom: 1em;
+}
+
+.group > details:last-child {
+  margin-bottom: 0;
+}
+
+    -->
+    </style>
+  </head>
+  <body>
+    <h1>Drupal Module Upgrader analysis report</h1>
+      <details open="true" class="group">
+      <summary></summary>
+          <details class="error">
+      <summary><code>hook_menu()</code> has been removed from Drupal 8.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/1800686">All functionality of <code>hook_menu()</code> replaced</a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2177901">Dynamic routes are now defined in <code>MODULE.routing.yml</code></a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2119699">Page callbacks have been converted to controller classes</a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2089605">Route naming convention</a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2165243">Contextual links are now plugins defined in <code>MODULE.links.contextual.yml</code></a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2007444">Local actions are now plugins defined in <code>MODULE.links.action.yml</code></a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2044515">Local tasks and now plugins defined in <code>MODULE.links.task.yml</code></a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2228089">Menu links are now defined in <code>MODULE.links.menu.yml</code></a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 31</li>
+            </ul>
+                  <aside>Flagged by _flag_hook:menu</aside>    </details>
+    <details class="warning">
+      <summary>Many common functions, shared variables, and constants have been renamed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2324935">The global theme variables have been replaced by an ActiveTheme object</a></li>
+              </ul>
+      
+                      </details>
+    <details class="warning">
+      <summary>Static permissions are now defined in <code>MODULE.permissions.yml</code>.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2311427">Defining permissions in <code>MODULE.permissions.yml</code></a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 5</li>
+            </ul>
+            <p class="fixable">This issue can be fixed automatically.</p>      <aside>Flagged by hook_permission</aside>    </details>
+    <details class="error">
+      <summary><code>drupal_goto()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2023537"><code>drupal_goto()</code> removed</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 10</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 503</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 542</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 637</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 648</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 850</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 860</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 915</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1030</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1218</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1228</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1277</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 8</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 38</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 47</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 77</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 101</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 550</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 561</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1086</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1125</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1146</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1403</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1413</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1429</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1718</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1761</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1791</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1816</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2065</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2078</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2094</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2367</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2405</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2435</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2460</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2709</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2718</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2726</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2742</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 3014</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 25</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 52</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 101</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 112</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 166</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 255</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 19</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 176</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 202</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 359</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 695</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 709</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 809</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 867</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 971</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1093</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1167</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1363</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1518</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1663</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1676</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1759</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1805</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1931</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1983</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2029</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2042</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 8</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 42</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 471</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 482</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 517</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 721</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 731</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 766</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 957</li>
+            </ul>
+                  <aside>Flagged by _function_call:drupal_goto</aside>    </details>
+    <details class="error">
+      <summary><code>drupal_render()</code> has been removed.</summary>
+
+      
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 32</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 71</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1785</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2429</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 24</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 499</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 748</li>
+            </ul>
+                  <aside>Flagged by _function_call:drupal_render</aside>    </details>
+    <details class="error">
+      <summary><code>drupal_get_form()</code> has moved into the FormBuilder service.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2121003">Form generation functions moved into FormBuilder service</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 31</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 70</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1784</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2428</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 23</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 498</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 747</li>
+            </ul>
+                  <aside>Flagged by _function_call:drupal_get_form</aside>    </details>
+    <details class="error">
+      <summary><code>form_set_error()</code> is now a method of <code>FormStateInterface</code>.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2121003">Form functions moved into <code>FormStateInterface</code></a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 281</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 285</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 318</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 320</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 323</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 762</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 765</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1130</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1132</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1135</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 331</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 335</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 351</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 353</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 378</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 380</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 383</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 851</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 855</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 896</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 898</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 901</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1214</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1216</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1255</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1257</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1260</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1551</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1553</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1556</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1889</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1896</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1898</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1925</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1927</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1930</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2199</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2202</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2533</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2540</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2542</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2569</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2571</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2574</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2844</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2846</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2849</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 257</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 261</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 267</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 269</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 294</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 296</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 299</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 587</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 592</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 614</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 617</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 826</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 831</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 851</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 853</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 856</li>
+            </ul>
+                  <aside>Flagged by _function_call:form_set_error</aside>    </details>
+    <details class="error">
+      <summary><code>l()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2346779"><code>l()</code> replaced by URL generation API</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 897</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 963</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 968</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 968</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 974</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1019</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1260</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1264</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1320</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1325</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1325</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1331</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1376</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2160</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2807</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 627</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 682</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 731</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 736</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 736</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 740</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 740</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 740</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 746</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 769</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 772</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 772</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 776</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 783</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 829</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 832</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 840</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 887</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 887</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 887</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 887</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 890</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 898</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 958</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1688</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1693</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1698</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1698</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1709</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1712</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1712</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1723</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1731</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1770</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1773</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1822</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1825</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1893</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1948</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1951</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1994</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1997</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2054</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2059</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2064</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2064</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2075</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2078</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2078</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2089</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2097</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2151</li>
+            </ul>
+                  <aside>Flagged by _function_call:l</aside>    </details>
+    <details class="error">
+      <summary><code>theme()</code> has been renamed to <code>_theme()</code>, and should never be called directly.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2195739"><code>theme()</code> renamed to <code>_theme()</code> and should not be called directly</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 642</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 760</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 793</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 850</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 908</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1743</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1791</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1843</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1914</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1969</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2015</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2109</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2172</li>
+            </ul>
+                  <aside>Flagged by _function_call:theme</aside>    </details>
+    <details class="error">
+      <summary><code>variable_get()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2183531">The Variable API has been removed</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 104</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 108</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 121</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 125</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 308</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 311</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 718</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 722</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1092</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1123</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 191</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 195</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 202</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 206</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 368</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 371</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 664</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 668</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 681</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 685</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 886</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 889</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1175</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1186</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1198</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1242</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1245</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1248</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1465</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1483</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1501</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1538</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1541</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1544</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1774</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1775</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1854</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1858</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1865</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1869</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1915</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1918</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2140</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2152</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2418</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2419</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2498</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2502</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2509</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2513</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2559</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2562</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2721</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2787</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2799</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2834</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2837</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1686</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1705</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2052</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2071</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 13</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 22</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 31</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 40</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 49</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 58</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 67</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 77</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 86</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 95</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 104</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 113</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 122</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 131</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 140</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 149</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 158</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 167</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 176</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 124</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 128</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 135</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 139</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 284</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 287</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 487</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 488</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 571</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 575</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 736</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 737</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 814</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 844</li>
+            </ul>
+                  <aside>Flagged by _function_call:variable_get</aside>    </details>
+    <details class="error">
+      <summary><code>variable_set()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2183531">The Variable API has been removed</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/settings.inc, line 205</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 206</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 207</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 208</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 209</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 210</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 211</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 212</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 213</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 214</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 215</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 216</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 217</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 218</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 219</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 220</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 221</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 222</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 223</li>
+            </ul>
+                  <aside>Flagged by _function_call:variable_set</aside>    </details>
+    <details class="error">
+      <summary><code>drupal_set_message()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2774931"><code>drupal_set_message()</code> moved into stream wrapper manager service.</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 8</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 423</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 452</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 456</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 462</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 491</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 495</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 502</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 540</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 636</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 646</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 818</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 838</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 842</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 849</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 858</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 913</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1028</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1186</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1206</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1210</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1217</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1226</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1275</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 6</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 37</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 45</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 76</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 100</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 460</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 485</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 504</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 508</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 514</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 533</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 537</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 546</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 549</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 559</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1006</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1035</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1039</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1045</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1074</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1078</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1085</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1123</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1145</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1306</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1328</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1332</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1338</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1360</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1364</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1370</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1392</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1396</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1402</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1411</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1428</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1600</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1629</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1633</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1639</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1668</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1672</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1678</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1707</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1711</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1759</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1790</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1815</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2000</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2022</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2026</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2032</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2054</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2058</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2064</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2076</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2093</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2268</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2299</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2303</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2325</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2355</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2359</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2366</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2403</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2434</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2459</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2644</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2666</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2670</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2676</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2698</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2702</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2708</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2716</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2725</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2741</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2915</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2946</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2950</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2972</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 3002</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 3006</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 3013</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 24</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 51</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 100</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 110</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 164</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 254</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 18</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 175</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 201</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 358</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 693</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 708</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 783</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 807</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 840</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 865</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 898</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 969</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1092</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1166</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1362</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1517</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1661</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1675</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1731</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1757</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1781</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1803</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1833</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1903</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1929</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1959</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1981</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2005</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2027</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2041</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2097</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2161</li>
+              <li>modules/esim_hackathon_submission/settings.inc, line 224</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 6</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 41</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 406</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 425</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 429</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 435</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 454</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 458</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 467</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 470</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 480</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 516</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 692</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 704</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 708</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 717</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 720</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 729</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 765</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 928</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 940</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 944</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 953</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 956</li>
+            </ul>
+                  <aside>Flagged by _function_call:drupal_set_message</aside>    </details>
+    <details class="error">
+      <summary><code>db_query()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2993033"><code>db_query()</code> is deprecated.</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 348</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 374</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 398</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 435</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 451</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 474</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 490</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 635</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 792</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 828</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 837</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1160</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1196</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1205</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 427</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 444</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 503</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 532</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 924</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 957</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 981</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1018</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1034</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1057</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1073</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1325</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1357</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1389</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1612</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1628</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1651</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1667</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1690</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1706</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1975</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2019</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2051</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2233</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2267</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2282</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2298</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2324</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2338</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2354</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2619</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2663</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2695</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2880</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2914</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2929</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2945</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2971</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2985</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 3001</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 12</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 29</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 34</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 40</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 191</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 195</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 212</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 217</li>
+              <li>modules/esim_hackathon_submission/latex.inc, line 223</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 921</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 925</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1173</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1356</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1373</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1378</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1384</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1507</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1511</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1528</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1533</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1539</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 349</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 366</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 424</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 453</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 665</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 703</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 901</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 939</li>
+            </ul>
+                  <aside>Flagged by _function_call:db_query</aside>    </details>
+    <details class="error">
+      <summary><code>db_select()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2993033"><code>db_select()</code> is deprecated.</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 13</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 127</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 352</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 510</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 545</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 651</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 796</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 863</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 918</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 924</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 984</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 990</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1033</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1164</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1231</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1280</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1286</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1341</li>
+              <li>modules/esim_hackathon_submission/edit_submission.inc, line 1347</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 11</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 50</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 84</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 91</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 392</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 564</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 572</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 687</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 928</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 935</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1093</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1128</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1136</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1269</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1416</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1423</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1568</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1725</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1764</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1798</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1806</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 1940</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2081</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2088</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2214</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2374</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2408</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2442</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2450</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2584</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2729</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2736</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 2861</li>
+              <li>modules/esim_hackathon_submission/final_submission.inc, line 3021</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 8</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 35</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 63</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 68</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 117</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 171</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 217</li>
+              <li>modules/esim_hackathon_submission/download.inc, line 222</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 609</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 618</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 652</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 658</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 700</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 711</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 720</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 813</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 822</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 871</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 880</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 976</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1024</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1030</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1044</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1104</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1111</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1125</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1209</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1215</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1229</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1668</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1678</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1763</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1809</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1816</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1853</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1883</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1935</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1942</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 1987</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2034</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2044</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2119</li>
+              <li>modules/esim_hackathon_submission/hackathon_submission.module, line 2141</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 32</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 507</li>
+              <li>modules/esim_hackathon_submission/add_submission.inc, line 756</li>
+            </ul>
+                  <aside>Flagged by _function_call:db_select</aside>    </details>
+
+    </details>
+    </body>
+</html>

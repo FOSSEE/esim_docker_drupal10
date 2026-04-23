@@ -1,0 +1,654 @@
+<?php
+use Drupal\Core\Database\Database;
+use Drupal\user\Entity\User;
+
+
+function circuit_simulation_mail($key, &$message, $params) {
+	  $language = \Drupal::currentUser()->getPreferredLangcode();
+  $language = $params['language'] ?? $language;
+  $message['langcode'] = $language;
+
+    switch ($key)
+	 
+	{
+
+      case 'circuit_simulation_proposal_received':
+        $query = \Drupal::database()->select('esim_circuit_simulation_proposal', 'p')
+          ->fields('p')
+          ->condition('id', $params['circuit_simulation_proposal_received']['proposal_id'])
+          ->range(0, 1);
+        $proposal_data = $query->execute()->fetchObject();
+        //var_dump($proposal_data);die;
+        // Load user entity.
+
+        $user = \Drupal\user\Entity\User::load($params['circuit_simulation_proposal_received']['user_id']);
+        if ($proposal_data->project_guide_name == "NULL" || $proposal_data->project_guide_name == "")
+			{
+				$project_guide_name = "Not Entered";
+			} //$proposal_data->project_guide_name == NULL
+			else
+			{
+				$project_guide_name = $proposal_data->project_guide_name;
+			}
+			if ($proposal_data->project_guide_email_id == "NULL" || $proposal_data->project_guide_email_id == "")
+			{
+				$project_guide_email_id = "Not Entered";
+			} //$proposal_data->project_guide_email_id == NULL
+			else
+			{
+				$project_guide_email_id = $proposal_data->project_guide_email_id;
+			}
+        // Prepare the email message.
+        $site_name = \Drupal::config('system.site')->get('name');
+        $message['headers'] = $params['circuit_simulation_proposal_received']['headers'];
+        $message['subject'] = t(
+              '[@site][Circuit Simulation Project] Your eSim Circuit Simulation Project proposal has been received',
+    ['@site' => $site_name],
+    ['langcode' => $langcode]
+
+        );
+        //var_dump($message);die;
+        $message['body'][] = t(
+          '
+Dear @name,
+
+We have received your eSim Circuit Simulation Project proposal with the following details:
+
+Full Name: @full_name
+Email: @user_email
+University/Institute: @university
+City: @city
+State: @state
+Country: @country
+Project Title: @project_title
+Project Guide Name: @project_guide_name
+Project Guide Email: @project_guide_email_id
+
+Your proposal is under review. You will soon receive an email when it has been approved/disapproved.
+
+Best Wishes,
+
+@site Team,
+FOSSEE, IIT Bombay',
+          [
+            '@name' => $proposal_data->name_title . ' ' . $proposal_data->contributor_name,
+            '@full_name' => $proposal_data->name_title . ' ' . $proposal_data->contributor_name,
+            '@user_email' => $user->getEmail(),
+            '@university' => $proposal_data->university,
+            '@city' => $proposal_data->city,
+            '@state' => $proposal_data->state,
+            '@country' => $proposal_data->country,
+            '@project_title' => $proposal_data->project_title,
+            '@project_guide_name' => $project_guide_name,
+            '@project_guide_email_id' => $project_guide_email_id,
+            '@site' => \Drupal::config('system.site')->get('name'),
+          ],
+          ['langcode' => $language]
+        );
+        break;
+
+
+
+    case 'circuit_simulation_proposal_approved':
+			/* initializing data */
+			$url = 'http://esim.fossee.in/circuit-simulation-project/abstract-code';
+			$query = \Drupal::database()->select('esim_circuit_simulation_proposal');
+			$query->fields('esim_circuit_simulation_proposal');
+			$query->condition('id', $params['circuit_simulation_proposal_approved']['proposal_id']);
+			$query->range(0, 1);
+			$proposal_data = $query->execute()->fetchObject();
+			$user_data = \Drupal::entityTypeManager()->getStorage('user')->load($params['circuit_simulation_proposal_approved']['user_id']);
+
+			if ($proposal_data->project_guide_name == "NULL" || $proposal_data->project_guide_name == "")
+			{
+				$project_guide_name = "Not Entered";
+			} //$proposal_data->project_guide_name == NULL
+			else
+			{
+				$project_guide_name = $proposal_data->project_guide_name;
+			}
+			if ($proposal_data->project_guide_email_id == "NULL" || $proposal_data->project_guide_email_id == "")
+			{
+				$project_guide_email_id = "Not Entered";
+			} //$proposal_data->project_guide_email_id == NULL
+			else
+			{
+				$project_guide_email_id = $proposal_data->project_guide_email_id;
+			}
+			$message['headers'] = $params['circuit_simulation_proposal_approved']['headers'];
+			$message['subject'] = t(
+          '[@site][Circuit Simulation Project] Your eSim Circuit Simulation Project proposal has been approved',
+          // ['@site' => \Drupal::config('system.site')->get('name')],
+                            ['@site' => $site_name],
+
+          
+          ['langcode' => $language]
+        );
+			/*$message['subject'] = t('[@site_name][Circuit Simulation Project] Your eSim Circuit Simulation Project proposal has been approved', array(
+				'@site_name' => variable_get('site_name', '')
+			), array(
+				'language' => $language->language
+			));*/
+
+			$message['body'][] = 
+				t('
+Dear ' . $proposal_data->name_title . ' ' . $proposal_data->contributor_name . ',
+
+Your eSim Circuit Simulation Project proposal with the following details has been approved:
+
+Full Name: @full_name
+Email: @user_email
+University/Institute: @university
+City: @city
+State: @state
+Country: @country
+Project Title: @project_title
+Project Guide Name: @project_guide_name
+Project Guide Email: @project_guide_email_id
+
+You can upload your abstract and the completed simulation at: @url
+
+Best Wishes,
+
+@site_name Team,
+FOSSEE,IIT Bombay',
+			[
+            '@name' => $proposal_data->name_title . ' ' . $proposal_data->contributor_name,
+            '@full_name' => $proposal_data->name_title . ' ' . $proposal_data->contributor_name,
+            '@user_email' => $user_data->getEmail(),
+            '@university' => $proposal_data->university,
+            '@city' => $proposal_data->city,
+            '@state' => $proposal_data->state,
+            '@country' => $proposal_data->country,
+            '@project_title' => $proposal_data->project_title,
+            '@project_guide_name' => $project_guide_name,
+            '@project_guide_email_id' => $project_guide_email_id,
+            '@url' => $url,
+            '@site_name' => \Drupal::config('system.site')->get('name'),
+          ],
+          ['langcode' => $language]
+			);
+			break;
+
+
+
+case 'circuit_simulation_proposal_disapproved':
+
+  $proposal_data = \Drupal::database()
+    ->select('esim_circuit_simulation_proposal', 'ecsp')
+    ->fields('ecsp')
+    ->condition('id', $params['circuit_simulation_proposal_disapproved']['proposal_id'])
+    ->execute()
+    ->fetchObject();
+
+  $user = \Drupal\user\Entity\User::load($params['circuit_simulation_proposal_disapproved']['user_id']);
+
+  if (!$proposal_data || !$user) {
+    return;
+  }
+
+  $project_guide_name = (!empty($proposal_data->project_guide_name) && $proposal_data->project_guide_name !== 'NULL')
+    ? $proposal_data->project_guide_name
+    : 'Not Entered';
+
+  $project_guide_email_id = (!empty($proposal_data->project_guide_email_id) && $proposal_data->project_guide_email_id !== 'NULL')
+    ? $proposal_data->project_guide_email_id
+    : 'Not Entered';
+
+  $site_name = \Drupal::config('system.site')->get('name');
+  $langcode = $message['langcode'] ?? \Drupal::languageManager()->getDefaultLanguage()->getId();
+
+  $message['headers'] = $params['circuit_simulation_proposal_disapproved']['headers'];
+
+  $message['subject'] = t(
+    '[@site][Circuit Simulation Project] Your eSim Circuit Simulation Project proposal has been disapproved',
+    ['@site' => $site_name],
+    ['langcode' => $langcode]
+  );
+
+  $message['body'][] = t(
+"Dear @user_name,
+
+We regret to inform you that your eSim Circuit Simulation Project proposal with the following details has been disapproved:
+
+Full Name : @full_name
+Email : @email
+University/Institute : @university
+City : @city
+State : @state
+Country : @country
+Project Guide : @guide_name
+Project Guide Email : @guide_email
+Project Title : @project_title
+
+Reason for rejection:
+@reason
+
+You are welcome to submit a new proposal.
+
+Best Wishes,
+
+@site Team,
+FOSSEE, IIT Bombay",
+    [
+      '@site' => $site_name,
+      '@user_name' => $user->getDisplayName(),
+      '@full_name' => $proposal_data->name_title . ' ' . $proposal_data->contributor_name,
+      '@email' => $user->getEmail(),
+      '@university' => $proposal_data->university,
+      '@city' => $proposal_data->city,
+      '@state' => $proposal_data->state,
+      '@country' => $proposal_data->country,
+      '@guide_name' => $project_guide_name,
+      '@guide_email' => $project_guide_email_id,
+      '@project_title' => $proposal_data->project_title,
+      '@reason' => $proposal_data->dissapproval_reason,
+    ],
+    ['langcode' => $langcode]
+  );
+
+  break;
+
+  case 'circuit_simulation_proposal_completed':
+
+  $proposal_data = \Drupal::database()
+    ->select('esim_circuit_simulation_proposal', 'ecsp')
+    ->fields('ecsp')
+    ->condition('id', $params['circuit_simulation_proposal_completed']['proposal_id'])
+    ->execute()
+    ->fetchObject();
+
+  $user = \Drupal\user\Entity\User::load(
+    $params['circuit_simulation_proposal_completed']['user_id']
+  );
+
+  if (!$proposal_data || !$user) {
+    return;
+  }
+
+  $project_guide_name = (!empty($proposal_data->project_guide_name) && $proposal_data->project_guide_name !== 'NULL')
+    ? $proposal_data->project_guide_name
+    : 'Not Entered';
+
+  $project_guide_email_id = (!empty($proposal_data->project_guide_email_id) && $proposal_data->project_guide_email_id !== 'NULL')
+    ? $proposal_data->project_guide_email_id
+    : 'Not Entered';
+
+  $site_name = \Drupal::config('system.site')->get('name');
+  $langcode = $message['langcode'] ?? \Drupal::languageManager()->getDefaultLanguage()->getId();
+
+  $message['headers'] = $params['circuit_simulation_proposal_completed']['headers'];
+
+  $message['subject'] = t(
+    '[@site][Circuit Simulation Project] Your eSim Circuit Simulation Project proposal has been completed',
+    ['@site' => $site_name],
+    ['langcode' => $langcode]
+  );
+
+  $message['body'][] = t(
+"Dear @user_name,
+
+Your eSim circuit simulation and abstract on the following process have been completed successfully.
+
+Full Name : @full_name
+Email : @email
+University/Institute : @university
+City : @city
+State : @state
+Country : @country
+
+Project Guide : @guide_name
+Project Guide Email : @guide_email
+Project Title : @project_title
+
+Best Wishes,
+
+@site Team,
+FOSSEE, IIT Bombay",
+    [
+      '@site_name' => $site_name,
+      '@user_name' => $user->getDisplayName(),
+      '@full_name' => $proposal_data->name_title . ' ' . $proposal_data->contributor_name,
+      '@email' => $user->getEmail(),
+      '@university' => $proposal_data->university,
+      '@city' => $proposal_data->city,
+      '@state' => $proposal_data->state,
+      '@country' => $proposal_data->country,
+      '@guide_name' => $project_guide_name,
+      '@guide_email' => $project_guide_email_id,
+      '@project_title' => $proposal_data->project_title,
+    ],
+    ['langcode' => $langcode]
+  );
+
+  break;
+
+  case 'circuit_simulation_proposal_deleted':
+
+  $proposal_data = \Drupal::database()
+    ->select('esim_circuit_simulation_proposal', 'ecsp')
+    ->fields('ecsp')
+    ->condition('id', $params['circuit_simulation_proposal_deleted']['proposal_id'])
+    ->execute()
+    ->fetchObject();
+
+  $user = \Drupal\user\Entity\User::load(
+    $params['circuit_simulation_proposal_deleted']['user_id']
+  );
+
+  if (!$proposal_data || !$user) {
+    return;
+  }
+
+  $project_guide_name = (!empty($proposal_data->project_guide_name) && $proposal_data->project_guide_name !== 'NULL')
+    ? $proposal_data->project_guide_name
+    : 'Not Entered';
+
+  $project_guide_email_id = (!empty($proposal_data->project_guide_email_id) && $proposal_data->project_guide_email_id !== 'NULL')
+    ? $proposal_data->project_guide_email_id
+    : 'Not Entered';
+
+  $site_name = \Drupal::config('system.site')->get('name');
+  $langcode = $message['langcode'] ?? \Drupal::languageManager()->getDefaultLanguage()->getId();
+
+  $message['headers'] = $params['circuit_simulation_proposal_deleted']['headers'];
+
+  $message['subject'] = t(
+    '[@site][Circuit Simulation Project] Your eSim Circuit Simulation Project proposal has been deleted',
+    ['@site' => $site_name],
+    ['langcode' => $langcode]
+  );
+
+  $message['body'][] = t(
+"Dear @user_name,
+
+Your eSim Circuit Simulation Project proposal with the following details has been deleted:
+
+Full Name : @full_name
+Email : @email
+
+University/Institute : @university
+City : @city
+State : @state
+Country : @country
+Project Guide : @guide_name
+Project Guide Email : @guide_email
+Project Title : @project_title
+
+You can propose a new circuit simulation project.
+
+Best Wishes,
+
+@site Team,
+FOSSEE, IIT Bombay",
+    [
+      '@site' => $site_name,
+      '@user_name' => $user->getDisplayName(),
+      '@full_name' => $proposal_data->name_title . ' ' . $proposal_data->contributor_name,
+      '@email' => $user->getEmail(),
+      '@university' => $proposal_data->university,
+      '@city' => $proposal_data->city,
+      '@state' => $proposal_data->state,
+      '@country' => $proposal_data->country,
+      '@guide_name' => $project_guide_name,
+      '@guide_email' => $project_guide_email_id,
+      '@project_title' => $proposal_data->project_title,
+    ],
+    ['langcode' => $langcode]
+  );
+
+  break;
+
+
+
+case 'abstract_uploaded':
+
+  $langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
+
+  $database = \Drupal::database();
+
+  $query = $database->select('esim_circuit_simulation_proposal', 'e');
+  $query->fields('e');
+  $query->condition('id', $params['abstract_uploaded']['proposal_id']);
+  $query->range(0, 1);
+  $proposal_data = $query->execute()->fetchObject();
+
+  $user = \Drupal\user\Entity\User::load($params['abstract_uploaded']['user_id']);
+
+  $site_name = \Drupal::config('system.site')->get('name');
+
+  if (!empty($params['abstract_uploaded']['headers'])) {
+    $message['headers'] += $params['abstract_uploaded']['headers'];
+  }
+
+  $message['subject'] = t(
+    '[@site][Circuit Simulation Project] You have uploaded eSim circuit simulation abstract',
+    ['@site' => $site_name]
+  );
+
+  $message['body'][] = t(
+'Dear @user_name,
+
+You have uploaded the following Abstract:
+
+Project Title : @project_title
+
+The abstract is under review. You will be notified when it has been approved.
+
+Best Wishes,
+
+@site Team,
+FOSSEE, IIT Bombay',
+    [
+      '@site' => $site_name,
+      '@user_name' => $user ? $user->getDisplayName() : '',
+      '@project_title' => $proposal_data ? $proposal_data->project_title : '',
+    ]
+  );
+
+break;
+
+//   case 'solution_approved':
+    
+//     $site_name = \Drupal::config('system.site')->get('name');
+
+// /* Load user entity safely */
+// $user_data = User::load($user_info->uid ?? 0);
+
+// $user_name = 'User';  
+
+//  $site_name = \Drupal::config('system.site')->get('name');
+
+// $email_subject = t(
+//   '[@site][Circuit Simulation Project] Your uploaded circuit simulation project has been approved',
+//   ['@site' => $site_name]
+// );
+
+// $email_body = [
+//   t(
+// 'Dear @user_name,
+
+// Your uploaded abstract for the circuit simulation project has been approved:
+
+// Title of circuit simulation project : @project_title
+
+// Best Wishes,
+
+// @site Team,
+// FOSSEE, IIT Bombay',
+//     [
+//       '@site' => $site_name,
+//       '@user_name' => $user_data->getDisplayName(),
+//       '@project_title' => $user_info->project_title,
+//     ]
+//   ),
+// ];
+
+//   break;
+/**
+ * Implements hook_mail().
+ */
+
+    case 'solution_approved':
+
+      /* Subject */
+      $message['subject'] = $params['solution_approved']['subject'];
+
+      /* Body */
+      if (!empty($params['solution_approved']['body'])) {
+        foreach ($params['solution_approved']['body'] as $line) {
+          $message['body'][] = $line;
+        }
+      }
+
+      /* Headers */
+      if (!empty($params['solution_approved']['headers'])) {
+        foreach ($params['solution_approved']['headers'] as $header => $value) {
+          if (!empty($value)) {
+            $message['headers'][$header] = $value;
+          }
+        }
+      }
+
+      break;
+  
+
+
+  case 'solution_disapproved':
+
+  $user = \Drupal\user\Entity\User::load(
+    $params['solution_disapproved']['user_id']
+  );
+
+  if (!$user) {
+    return;
+  }
+
+  $site_name = \Drupal::config('system.site')->get('name');
+  $langcode = $message['langcode'] ?? \Drupal::languageManager()->getDefaultLanguage()->getId();
+
+  $message['headers'] = $params['solution_disapproved']['headers'];
+
+  $message['subject'] = t(
+    '[@site] Your uploaded eSim circuit-simulation solution has been disapproved',
+    ['@site' => $site_name],
+    ['langcode' => $langcode]
+  );
+
+  $message['body'][] = t(
+"Dear @user_name,
+
+Your following solution has been disapproved:
+
+Solution number : @solution_number
+Caption : @caption
+
+Reason for dis-approval:
+@reason
+
+Best Wishes,
+
+@site Team,
+FOSSEE, IIT Bombay",
+    [
+      '@site' => $site_name,
+      '@user_name' => $user->getDisplayName(),
+      '@solution_number' => $params['solution_disapproved']['solution_number'],
+      '@caption' => $params['solution_disapproved']['solution_caption'],
+      '@reason' => $params['solution_disapproved']['message'],
+    ],
+    ['langcode' => $langcode]
+  );
+
+  break;
+
+
+case 'solution_deleted_user':
+
+  $user = User::load($params['solution_deleted_user']['user_id']);
+
+  $site_name = \Drupal::config('system.site')->get('name');
+
+  $message['headers'] = $params['solution_deleted_user']['headers'];
+
+  $message['subject'] = t('[@site] User has deleted pending eSim circuit-simulation solution', [
+    '@site' => $site_name,
+  ]);
+
+  $message['body'] = [
+    'body' => t('
+Dear @user_name,
+
+Your following pending solution has been deleted :
+
+Title of the Lab : @lab_title
+Title of the Experiment : @experiment_title
+
+Solution number : @solution_number
+Caption : @solution_caption
+
+Best Wishes,
+
+@site Team,
+FOSSEE, IIT Bombay', [
+      '@site'        => $site_name,
+      '@user_name'       => $user ? $user->getDisplayName() : 'User',
+      '@lab_title'       => $params['solution_deleted_user']['lab_title'],
+      '@experiment_title' => $params['solution_deleted_user']['experiment_title'],
+      '@solution_number' => $params['solution_deleted_user']['solution_number'],
+      '@solution_caption'=> $params['solution_deleted_user']['solution_caption'],
+    ]),
+  ];
+
+  break;
+
+
+
+case 'dependency_uploaded':
+
+  $user = User::load($params['dependency_uploaded']['user_id']);
+
+  $dependency_files = implode(', ', $params['dependency_uploaded']['dependency_names']);
+
+  $site_name = \Drupal::config('system.site')->get('name');
+
+  $message['headers'] = $params['dependency_uploaded']['headers'];
+
+  $message['subject'] = t('[@site] You have uploaded dependency file', [
+    '@site' => $site_name,
+  ]);
+
+  $message['body'] = [
+    'body' => t('
+Dear @user_name,
+
+You have uploaded following dependency files:
+@dependency_files
+
+Please ensure that ALL the codes follow guidelines at
+http://esim.fossee.in/esim-circuit-simulation-project/esim-circuit-simulation-guidelines
+
+Best Wishes,
+
+@site Team,
+FOSSEE, IIT Bombay', [
+      '@site' => $site_name,
+      '@user_name' => $user ? $user->getDisplayName() : 'User',
+      '@dependency_files' => $dependency_files,
+    ]),
+  ];
+
+  break;
+
+
+case 'standard':
+
+  $message['subject'] = $params['standard']['subject'];
+  $message['body']    = $params['standard']['body'];
+  $message['headers'] = $params['standard']['headers'];
+
+  break;
+    }
+    //var_dump($message);die;
+   // return $message;
+  }

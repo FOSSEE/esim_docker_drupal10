@@ -1,0 +1,5 @@
+name = "PSPICE To KICAD Convertor"
+description = "PSPICE To KICAD Convertor"
+package = "IITB"
+score = "8.x"
+type = module

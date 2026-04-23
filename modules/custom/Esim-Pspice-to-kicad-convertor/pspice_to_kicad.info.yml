@@ -1,0 +1,6 @@
+name: 'PSPICE To KICAD Convertor'
+description: 'PSPICE To KICAD Convertor'
+package: IITB
+core_version_requirement: ^8 || ^9 || ^10
+type: module
+dependencies: {  }

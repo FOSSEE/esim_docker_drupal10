@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Drupal Module Upgrader analysis report</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,700,600' rel='stylesheet' type='text/css' />
+    <style type="text/css">
+    <!--
+
+body {
+  width: 80%;
+  color: #343434;
+  margin: 1em auto;
+  font-family: 'Open Sans', Verdana, sans-serif;
+}
+
+details {
+  font-size: 18px;
+  line-height: 25px;
+  margin-bottom: 2em;
+  display: list-item;
+  list-style: none;
+}
+
+details summary {
+  padding: 1em;
+  margin-bottom: 1em;
+  display: list-item;
+  cursor: pointer;
+}
+
+details.error summary {
+  background-color: #ffd5d5;
+}
+
+details.warning summary {
+  background-color: #fff3bb;
+}
+
+a {
+  color: #095cb1;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+aside {
+  font-style: italic;
+  line-height: 20px;
+  font-size: 15px;
+}
+
+.group {
+  border: 1px solid #ececec;
+  padding: 1em;
+  display: block;
+}
+
+.group > summary {
+  padding: 0;
+  color: #c8c8c8;
+  margin-bottom: 0;;
+  font-weight: bold;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  display: list-item;
+}
+
+.group[open] > summary {
+  margin-bottom: 1em;
+}
+
+.group > details:last-child {
+  margin-bottom: 0;
+}
+
+    -->
+    </style>
+  </head>
+  <body>
+    <h1>Drupal Module Upgrader analysis report</h1>
+      <details open="true" class="group">
+      <summary></summary>
+          <details class="error">
+      <summary><code>hook_menu()</code> has been removed from Drupal 8.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/1800686">All functionality of <code>hook_menu()</code> replaced</a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2177901">Dynamic routes are now defined in <code>MODULE.routing.yml</code></a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2119699">Page callbacks have been converted to controller classes</a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2089605">Route naming convention</a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2165243">Contextual links are now plugins defined in <code>MODULE.links.contextual.yml</code></a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2007444">Local actions are now plugins defined in <code>MODULE.links.action.yml</code></a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2044515">Local tasks and now plugins defined in <code>MODULE.links.task.yml</code></a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2228089">Menu links are now defined in <code>MODULE.links.menu.yml</code></a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 8</li>
+            </ul>
+                  <aside>Flagged by _flag_hook:menu</aside>    </details>
+    <details class="warning">
+      <summary>Many common functions, shared variables, and constants have been renamed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2324935">The global theme variables have been replaced by an ActiveTheme object</a></li>
+              </ul>
+      
+                      </details>
+    <details class="error">
+      <summary>Info files must contain a <code>type</code> key.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/1935708#type"><code>.info</code> files are now <code>.info.yml</code> files</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/textbook_companion.info</li>
+            </ul>
+                  <aside>Flagged by info</aside>    </details>
+    <details class="error">
+      <summary>Classes must be PSR-4 compliant.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2246699">PSR-4 compatible class loader in Drupal core</a></li>
+              </ul>
+      
+                      </details>
+    <details class="warning">
+      <summary>Static permissions are now defined in <code>MODULE.permissions.yml</code>.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2311427">Defining permissions in <code>MODULE.permissions.yml</code></a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 591</li>
+            </ul>
+            <p class="fixable">This issue can be fixed automatically.</p>      <aside>Flagged by hook_permission</aside>    </details>
+    <details class="error">
+      <summary><code>drupal_add_js()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2169605"><code>drupal_add_css()</code>, <code>drupal_add_js()</code> and <code>drupal_add_library()</code> removed in favor of <code>#attached</code></a></li>
+                <li><a target="_blank" href="https://www.drupal.org/node/2408597"><code>AssetResolverInterface</code> and <code>AttachedAssetsInterface</code> replace internal Asset API functions</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/editcode.inc, line 563</li>
+              <li>modules/custom/textbook_companion/code.inc, line 113</li>
+              <li>modules/custom/textbook_companion/code.inc, line 365</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 545</li>
+            </ul>
+                  <aside>Flagged by _function_call:drupal_add_js</aside>    </details>
+    <details class="error">
+      <summary><code>drupal_goto()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2023537"><code>drupal_goto()</code> removed</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 186</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 191</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 389</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 394</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 461</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 525</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 551</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 747</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 784</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 812</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 817</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1491</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1575</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1590</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1728</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1798</li>
+              <li>modules/custom/textbook_companion/pdf/generate_pdf.inc, line 208</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 488</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 900</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1380</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 28</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 34</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 95</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 113</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 119</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 136</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 142</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 586</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 592</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 610</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 627</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 633</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 651</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 657</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1145</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1153</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1158</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1163</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1168</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1188</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1208</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1276</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1284</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1289</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1294</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1299</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1319</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1339</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 147</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 307</li>
+              <li>modules/custom/textbook_companion/code.inc, line 29</li>
+              <li>modules/custom/textbook_companion/code.inc, line 37</li>
+              <li>modules/custom/textbook_companion/code.inc, line 42</li>
+              <li>modules/custom/textbook_companion/code.inc, line 47</li>
+              <li>modules/custom/textbook_companion/code.inc, line 52</li>
+              <li>modules/custom/textbook_companion/code.inc, line 72</li>
+              <li>modules/custom/textbook_companion/code.inc, line 389</li>
+              <li>modules/custom/textbook_companion/code.inc, line 397</li>
+              <li>modules/custom/textbook_companion/code.inc, line 402</li>
+              <li>modules/custom/textbook_companion/code.inc, line 407</li>
+              <li>modules/custom/textbook_companion/code.inc, line 412</li>
+              <li>modules/custom/textbook_companion/code.inc, line 433</li>
+              <li>modules/custom/textbook_companion/code.inc, line 501</li>
+              <li>modules/custom/textbook_companion/code.inc, line 505</li>
+              <li>modules/custom/textbook_companion/code.inc, line 509</li>
+              <li>modules/custom/textbook_companion/code.inc, line 641</li>
+              <li>modules/custom/textbook_companion/code.inc, line 667</li>
+              <li>modules/custom/textbook_companion/code.inc, line 673</li>
+              <li>modules/custom/textbook_companion/code.inc, line 690</li>
+              <li>modules/custom/textbook_companion/code.inc, line 706</li>
+              <li>modules/custom/textbook_companion/code.inc, line 724</li>
+              <li>modules/custom/textbook_companion/code.inc, line 754</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 952</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 957</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 968</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1015</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1020</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1031</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1070</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1075</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1086</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2030</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3899</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 29</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 34</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 109</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 114</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 41</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 46</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 278</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 104</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 298</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 24</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 32</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 37</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 42</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 47</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 66</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 199</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 207</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 212</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 217</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 222</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 242</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 328</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 395</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 403</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 408</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 413</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 418</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 438</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 568</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 576</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 581</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 586</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 591</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 611</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 719</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 728</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 753</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 761</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 766</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 771</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 776</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 797</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 849</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 852</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 901</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 904</li>
+              <li>modules/custom/textbook_companion/download.inc, line 154</li>
+              <li>modules/custom/textbook_companion/download.inc, line 244</li>
+              <li>modules/custom/textbook_companion/download.inc, line 370</li>
+              <li>modules/custom/textbook_companion/general.inc, line 24</li>
+              <li>modules/custom/textbook_companion/general.inc, line 32</li>
+              <li>modules/custom/textbook_companion/general.inc, line 37</li>
+              <li>modules/custom/textbook_companion/general.inc, line 42</li>
+              <li>modules/custom/textbook_companion/general.inc, line 47</li>
+              <li>modules/custom/textbook_companion/general.inc, line 67</li>
+              <li>modules/custom/textbook_companion/general.inc, line 136</li>
+              <li>modules/custom/textbook_companion/general.inc, line 144</li>
+              <li>modules/custom/textbook_companion/general.inc, line 149</li>
+              <li>modules/custom/textbook_companion/general.inc, line 154</li>
+              <li>modules/custom/textbook_companion/general.inc, line 159</li>
+              <li>modules/custom/textbook_companion/general.inc, line 179</li>
+              <li>modules/custom/textbook_companion/general.inc, line 205</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 27</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 89</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 107</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 125</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 567</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 585</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 603</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 620</li>
+            </ul>
+                  <aside>Flagged by _function_call:drupal_goto</aside>    </details>
+    <details class="error">
+      <summary><code>drupal_render()</code> has been removed.</summary>
+
+      
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/pdf/verify_certificates.inc, line 15</li>
+              <li>modules/custom/textbook_companion/pdf/verify_certificates.inc, line 68</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 983</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1040</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1138</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1141</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1281</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1283</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1286</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1290</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1296</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1304</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1307</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1310</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1315</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1321</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1336</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1338</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1342</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1346</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1352</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1355</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1361</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1363</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1431</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1435</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1445</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1447</li>
+              <li>modules/custom/textbook_companion/run.inc, line 201</li>
+              <li>modules/custom/textbook_companion/run.inc, line 208</li>
+              <li>modules/custom/textbook_companion/run.inc, line 239</li>
+              <li>modules/custom/textbook_companion/run.inc, line 249</li>
+              <li>modules/custom/textbook_companion/run.inc, line 269</li>
+              <li>modules/custom/textbook_companion/run.inc, line 277</li>
+            </ul>
+                  <aside>Flagged by _function_call:drupal_render</aside>    </details>
+    <details class="error">
+      <summary><code>user_load()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2266845">Entities are now classed objects implementing <code>EntityInterface</code></a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 202</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 444</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 509</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 562</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 766</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 821</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 102</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 129</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 151</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 526</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 997</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1039</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 146</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2104</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2209</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2334</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2397</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2461</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2522</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2590</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2640</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2690</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2738</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2761</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2803</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2826</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2847</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2873</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2896</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2919</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2943</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2966</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 237</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 498</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 129</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 623</li>
+            </ul>
+                  <aside>Flagged by _function_call:user_load</aside>    </details>
+    <details class="error">
+      <summary><code>drupal_get_form()</code> has moved into the FormBuilder service.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2121003">Form generation functions moved into FormBuilder service</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/pdf/verify_certificates.inc, line 14</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1630</li>
+              <li>modules/custom/textbook_companion/code.inc, line 6</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 982</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1039</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1136</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1140</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 725</li>
+            </ul>
+                  <aside>Flagged by _function_call:drupal_get_form</aside>    </details>
+    <details class="error">
+      <summary><code>form_set_error()</code> is now a method of <code>FormStateInterface</code>.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2121003">Form functions moved into <code>FormStateInterface</code></a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 359</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1240</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1244</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1249</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1255</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1258</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1260</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1266</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1269</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1271</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1277</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1279</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1281</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1285</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1288</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1290</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 480</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 516</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 518</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 522</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1253</li>
+              <li>modules/custom/textbook_companion/code.inc, line 292</li>
+              <li>modules/custom/textbook_companion/code.inc, line 295</li>
+              <li>modules/custom/textbook_companion/code.inc, line 298</li>
+              <li>modules/custom/textbook_companion/code.inc, line 304</li>
+              <li>modules/custom/textbook_companion/code.inc, line 317</li>
+              <li>modules/custom/textbook_companion/code.inc, line 319</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1567</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1571</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1576</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1578</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1582</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1584</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1586</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1590</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1592</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1594</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1599</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1601</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1603</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1607</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1609</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1611</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1615</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1621</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1627</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1633</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1640</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1644</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1648</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1660</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1684</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1686</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1690</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 631</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 694</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 922</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1091</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 153</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 155</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 168</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 172</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 516</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 518</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 536</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 540</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 462</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 498</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 500</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 504</li>
+            </ul>
+                  <aside>Flagged by _function_call:form_set_error</aside>    </details>
+    <details class="error">
+      <summary><code>l()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2346779"><code>l()</code> replaced by URL generation API</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/pdf/list_all_certificates.inc, line 109</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 19</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 19</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 19</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 99</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 102</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 102</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 152</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 197</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 316</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 350</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 708</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 725</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1229</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1553</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1613</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1820</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1821</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1856</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 70</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 264</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 269</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 283</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 321</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 909</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1329</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 55</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 62</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 65</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 73</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 76</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 472</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1144</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1157</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1162</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1245</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1275</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1288</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1293</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1397</li>
+              <li>modules/custom/textbook_companion/code.inc, line 28</li>
+              <li>modules/custom/textbook_companion/code.inc, line 41</li>
+              <li>modules/custom/textbook_companion/code.inc, line 46</li>
+              <li>modules/custom/textbook_companion/code.inc, line 284</li>
+              <li>modules/custom/textbook_companion/code.inc, line 388</li>
+              <li>modules/custom/textbook_companion/code.inc, line 401</li>
+              <li>modules/custom/textbook_companion/code.inc, line 406</li>
+              <li>modules/custom/textbook_companion/code.inc, line 802</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 956</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1019</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1074</li>
+              <li>modules/custom/textbook_companion/cheque_manage.inc, line 18</li>
+              <li>modules/custom/textbook_companion/cheque_manage.inc, line 71</li>
+              <li>modules/custom/textbook_companion/cheque_manage.inc, line 71</li>
+              <li>modules/custom/textbook_companion/cheque_manage.inc, line 71</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 82</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 51</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 136</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 170</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1276</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1334</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1397</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1432</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1433</li>
+              <li>modules/custom/textbook_companion/run.inc, line 52</li>
+              <li>modules/custom/textbook_companion/run.inc, line 59</li>
+              <li>modules/custom/textbook_companion/run.inc, line 231</li>
+              <li>modules/custom/textbook_companion/run.inc, line 235</li>
+              <li>modules/custom/textbook_companion/run.inc, line 270</li>
+              <li>modules/custom/textbook_companion/run.inc, line 311</li>
+              <li>modules/custom/textbook_companion/run.inc, line 338</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 23</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 36</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 41</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 120</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 198</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 211</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 216</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 363</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 364</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 365</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 394</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 407</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 412</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 497</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 567</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 580</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 585</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 752</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 765</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 770</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 896</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 898</li>
+              <li>modules/custom/textbook_companion/general.inc, line 23</li>
+              <li>modules/custom/textbook_companion/general.inc, line 36</li>
+              <li>modules/custom/textbook_companion/general.inc, line 41</li>
+              <li>modules/custom/textbook_companion/general.inc, line 75</li>
+              <li>modules/custom/textbook_companion/general.inc, line 101</li>
+              <li>modules/custom/textbook_companion/general.inc, line 101</li>
+              <li>modules/custom/textbook_companion/general.inc, line 135</li>
+              <li>modules/custom/textbook_companion/general.inc, line 148</li>
+              <li>modules/custom/textbook_companion/general.inc, line 153</li>
+              <li>modules/custom/textbook_companion/general.inc, line 209</li>
+              <li>modules/custom/textbook_companion/general.inc, line 256</li>
+              <li>modules/custom/textbook_companion/general.inc, line 282</li>
+              <li>modules/custom/textbook_companion/general.inc, line 282</li>
+              <li>modules/custom/textbook_companion/general.inc, line 284</li>
+              <li>modules/custom/textbook_companion/search.inc, line 32</li>
+              <li>modules/custom/textbook_companion/search.inc, line 76</li>
+              <li>modules/custom/textbook_companion/search.inc, line 124</li>
+              <li>modules/custom/textbook_companion/search.inc, line 180</li>
+              <li>modules/custom/textbook_companion/search.inc, line 227</li>
+              <li>modules/custom/textbook_companion/search.inc, line 245</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 49</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 56</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 59</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 67</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 70</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 454</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1131</li>
+            </ul>
+                  <aside>Flagged by _function_call:l</aside>    </details>
+    <details class="error">
+      <summary><code>theme()</code> has been renamed to <code>_theme()</code>, and should never be called directly.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2195739"><code>theme()</code> renamed to <code>_theme()</code> and should not be called directly</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/pdf/list_all_certificates.inc, line 116</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 30</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 114</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 156</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1624</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1860</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 288</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 326</li>
+              <li>modules/custom/textbook_companion/cheque_manage.inc, line 82</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 166</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 62</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1427</li>
+              <li>modules/custom/textbook_companion/run.inc, line 335</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 369</li>
+              <li>modules/custom/textbook_companion/general.inc, line 112</li>
+              <li>modules/custom/textbook_companion/general.inc, line 289</li>
+              <li>modules/custom/textbook_companion/search.inc, line 81</li>
+              <li>modules/custom/textbook_companion/search.inc, line 131</li>
+              <li>modules/custom/textbook_companion/search.inc, line 191</li>
+              <li>modules/custom/textbook_companion/search.inc, line 234</li>
+            </ul>
+                  <aside>Flagged by _function_call:theme</aside>    </details>
+    <details class="error">
+      <summary><code>user_access()</code> is now <code>AccountInterface::hasPermission()</code>.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2049309"><code>user_access()</code> got converted to a method on the user/account interface</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 112</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 481</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 642</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 705</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 929</li>
+            </ul>
+                  <aside>Flagged by _function_call:user_access</aside>    </details>
+    <details class="error">
+      <summary><code>variable_del()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2183531">The Variable API has been removed</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 975</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 25</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 26</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 27</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 28</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 29</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 30</li>
+            </ul>
+                  <aside>Flagged by _function_call:variable_del</aside>    </details>
+    <details class="error">
+      <summary><code>variable_get()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2183531">The Variable API has been removed</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 446</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 447</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 448</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 511</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 512</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 513</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 768</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 769</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 770</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 98</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 99</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 100</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 133</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 139</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 155</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 161</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1001</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1043</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1049</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 240</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 251</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 503</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 506</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 509</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1104</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1105</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1106</li>
+              <li>modules/custom/textbook_companion/code.inc, line 186</li>
+              <li>modules/custom/textbook_companion/code.inc, line 310</li>
+              <li>modules/custom/textbook_companion/code.inc, line 628</li>
+              <li>modules/custom/textbook_companion/code.inc, line 629</li>
+              <li>modules/custom/textbook_companion/code.inc, line 630</li>
+              <li>modules/custom/textbook_companion/code.inc, line 735</li>
+              <li>modules/custom/textbook_companion/code.inc, line 736</li>
+              <li>modules/custom/textbook_companion/code.inc, line 737</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1093</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1543</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1677</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1703</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2015</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2016</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2017</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2106</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2155</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2211</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2263</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2301</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2336</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2368</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2399</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2429</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2463</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2492</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2524</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2558</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2592</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2608</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2642</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2658</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2692</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2706</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2740</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2754</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2780</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2796</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2805</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2819</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2830</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2840</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2849</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2865</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2875</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2888</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2898</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2911</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2921</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2934</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2945</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2958</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2968</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2981</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3160</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3161</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3163</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3203</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3204</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3206</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3286</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3287</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3289</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3387</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3388</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3390</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3755</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3756</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3893</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3895</li>
+              <li>modules/custom/textbook_companion/settings.inc, line 13</li>
+              <li>modules/custom/textbook_companion/settings.inc, line 32</li>
+              <li>modules/custom/textbook_companion/settings.inc, line 41</li>
+              <li>modules/custom/textbook_companion/settings.inc, line 51</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 176</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 177</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 178</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 250</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 251</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 253</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 258</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 259</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 260</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 276</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 277</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 278</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 544</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 561</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 603</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 621</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 665</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 684</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 773</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 792</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 835</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 848</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 886</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 899</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 948</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 963</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1008</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1023</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1066</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1081</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1129</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1146</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1159</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1160</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1161</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 99</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 146</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 153</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 313</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 314</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 315</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 469</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 509</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 516</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 704</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 705</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 706</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 223</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 234</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 485</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 488</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 491</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1074</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1075</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1076</li>
+            </ul>
+                  <aside>Flagged by _function_call:variable_get</aside>    </details>
+    <details class="error">
+      <summary><code>variable_set()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2183531">The Variable API has been removed</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/settings.inc, line 95</li>
+              <li>modules/custom/textbook_companion/settings.inc, line 96</li>
+              <li>modules/custom/textbook_companion/settings.inc, line 98</li>
+              <li>modules/custom/textbook_companion/settings.inc, line 99</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 10</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 11</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 12</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 13</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 14</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 15</li>
+            </ul>
+                  <aside>Flagged by _function_call:variable_set</aside>    </details>
+    <details class="error">
+      <summary><code>drupal_set_message()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2774931"><code>drupal_set_message()</code> moved into stream wrapper manager service.</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/pdf/list_all_certificates.inc, line 72</li>
+              <li>modules/custom/textbook_companion/pdf/list_all_certificates.inc, line 128</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 25</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 109</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 185</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 190</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 388</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 393</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 458</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 460</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 522</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 524</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 550</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 746</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 780</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 782</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 811</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 816</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1466</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1490</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1574</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1589</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1619</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1727</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1797</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 112</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 113</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 118</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 119</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 134</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 135</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 140</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 141</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 156</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 157</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 162</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 163</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 166</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 449</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 453</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 457</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 487</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 899</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1002</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1003</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1021</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1044</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1045</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1050</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1051</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1060</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1075</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1090</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1379</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 27</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 33</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 94</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 112</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 118</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 135</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 141</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 585</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 591</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 609</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 626</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 632</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 650</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 656</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 734</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 741</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 752</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 758</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 790</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 792</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 811</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 818</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 829</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 835</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 866</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 868</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 888</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 895</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 906</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 912</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 942</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 944</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 965</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 972</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 983</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 989</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1020</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1022</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1042</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1049</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1060</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1066</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1096</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1098</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1115</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1117</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1144</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1152</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1157</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1162</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1167</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1187</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1207</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1275</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1283</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1288</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1293</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1298</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1318</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1338</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1351</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 146</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 306</li>
+              <li>modules/custom/textbook_companion/code.inc, line 28</li>
+              <li>modules/custom/textbook_companion/code.inc, line 36</li>
+              <li>modules/custom/textbook_companion/code.inc, line 41</li>
+              <li>modules/custom/textbook_companion/code.inc, line 46</li>
+              <li>modules/custom/textbook_companion/code.inc, line 51</li>
+              <li>modules/custom/textbook_companion/code.inc, line 71</li>
+              <li>modules/custom/textbook_companion/code.inc, line 388</li>
+              <li>modules/custom/textbook_companion/code.inc, line 396</li>
+              <li>modules/custom/textbook_companion/code.inc, line 401</li>
+              <li>modules/custom/textbook_companion/code.inc, line 406</li>
+              <li>modules/custom/textbook_companion/code.inc, line 411</li>
+              <li>modules/custom/textbook_companion/code.inc, line 432</li>
+              <li>modules/custom/textbook_companion/code.inc, line 500</li>
+              <li>modules/custom/textbook_companion/code.inc, line 504</li>
+              <li>modules/custom/textbook_companion/code.inc, line 508</li>
+              <li>modules/custom/textbook_companion/code.inc, line 584</li>
+              <li>modules/custom/textbook_companion/code.inc, line 617</li>
+              <li>modules/custom/textbook_companion/code.inc, line 619</li>
+              <li>modules/custom/textbook_companion/code.inc, line 623</li>
+              <li>modules/custom/textbook_companion/code.inc, line 639</li>
+              <li>modules/custom/textbook_companion/code.inc, line 666</li>
+              <li>modules/custom/textbook_companion/code.inc, line 672</li>
+              <li>modules/custom/textbook_companion/code.inc, line 689</li>
+              <li>modules/custom/textbook_companion/code.inc, line 705</li>
+              <li>modules/custom/textbook_companion/code.inc, line 723</li>
+              <li>modules/custom/textbook_companion/code.inc, line 731</li>
+              <li>modules/custom/textbook_companion/code.inc, line 749</li>
+              <li>modules/custom/textbook_companion/code.inc, line 751</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 951</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 956</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 961</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 964</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 967</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1014</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1019</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1024</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1027</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1030</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1069</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1074</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1079</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1082</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1085</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1706</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1776</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1790</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1792</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1800</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1845</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1907</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1966</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2008</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2027</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2029</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3114</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3130</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3148</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3156</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3177</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3200</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3216</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3220</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3255</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3283</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3299</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3312</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3334</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3371</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3377</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3384</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3402</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3760</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3837</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3885</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3894</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3896</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3898</li>
+              <li>modules/custom/textbook_companion/settings.inc, line 103</li>
+              <li>modules/custom/textbook_companion/cheque_manage.inc, line 77</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 168</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 173</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 189</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 233</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 239</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 247</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 266</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 28</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 33</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 108</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 113</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 142</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 155</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 40</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 45</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 83</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 240</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 277</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 22</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 57</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 103</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 269</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 291</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 293</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 297</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 536</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 595</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 632</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 644</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 650</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 652</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 695</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 707</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 727</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 735</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 739</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 765</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 796</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 828</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 878</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 923</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 931</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 937</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 939</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1001</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1059</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1092</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1117</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1119</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1151</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1169</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1173</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 23</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 31</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 36</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 41</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 46</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 65</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 198</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 206</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 211</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 216</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 221</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 241</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 295</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 303</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 310</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 325</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 394</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 402</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 407</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 412</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 417</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 437</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 567</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 575</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 580</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 585</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 590</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 610</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 689</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 694</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 701</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 716</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 752</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 760</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 765</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 770</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 775</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 796</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 848</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 851</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 900</li>
+              <li>modules/custom/textbook_companion/download.inc, line 153</li>
+              <li>modules/custom/textbook_companion/download.inc, line 243</li>
+              <li>modules/custom/textbook_companion/download.inc, line 369</li>
+              <li>modules/custom/textbook_companion/general.inc, line 23</li>
+              <li>modules/custom/textbook_companion/general.inc, line 31</li>
+              <li>modules/custom/textbook_companion/general.inc, line 36</li>
+              <li>modules/custom/textbook_companion/general.inc, line 41</li>
+              <li>modules/custom/textbook_companion/general.inc, line 46</li>
+              <li>modules/custom/textbook_companion/general.inc, line 66</li>
+              <li>modules/custom/textbook_companion/general.inc, line 107</li>
+              <li>modules/custom/textbook_companion/general.inc, line 135</li>
+              <li>modules/custom/textbook_companion/general.inc, line 143</li>
+              <li>modules/custom/textbook_companion/general.inc, line 148</li>
+              <li>modules/custom/textbook_companion/general.inc, line 153</li>
+              <li>modules/custom/textbook_companion/general.inc, line 158</li>
+              <li>modules/custom/textbook_companion/general.inc, line 178</li>
+              <li>modules/custom/textbook_companion/general.inc, line 204</li>
+              <li>modules/custom/textbook_companion/search.inc, line 72</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 26</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 88</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 106</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 124</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 566</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 584</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 602</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 619</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 700</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 707</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 718</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 724</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 755</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 757</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 778</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 785</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 796</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 802</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 834</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 836</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 856</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 863</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 874</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 880</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 911</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 913</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 933</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 940</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 951</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 957</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 989</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 991</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1011</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1018</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1029</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1035</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1066</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1068</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1085</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1087</li>
+            </ul>
+                  <aside>Flagged by _function_call:drupal_set_message</aside>    </details>
+    <details class="error">
+      <summary><code>db_delete()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2993033"><code>db_delete()</code> is deprecated.</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3182</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3232</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3305</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3408</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 272</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 756</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 761</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 832</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 844</li>
+            </ul>
+                  <aside>Flagged by _function_call:db_delete</aside>    </details>
+    <details class="error">
+      <summary><code>db_query()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2993033"><code>db_query()</code> is deprecated.</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/pdf/list_all_certificates.inc, line 101</li>
+              <li>modules/custom/textbook_companion/pdf/verify_certificates.inc, line 91</li>
+              <li>modules/custom/textbook_companion/pdf/verify_certificates.inc, line 94</li>
+              <li>modules/custom/textbook_companion/pdf/generate_pdf.inc, line 10</li>
+              <li>modules/custom/textbook_companion/pdf/generate_pdf.inc, line 12</li>
+              <li>modules/custom/textbook_companion/pdf/generate_pdf.inc, line 122</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 34</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 510</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1151</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 787</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 864</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 940</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1018</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1094</li>
+              <li>modules/custom/textbook_companion/code.inc, line 471</li>
+              <li>modules/custom/textbook_companion/code.inc, line 543</li>
+              <li>modules/custom/textbook_companion/code.inc, line 615</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1116</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1125</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1134</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1759</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1788</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1840</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1903</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1962</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3833</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3881</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 153</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 292</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 753</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 831</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 909</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 986</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1064</li>
+            </ul>
+                  <aside>Flagged by _function_call:db_query</aside>    </details>
+    <details class="error">
+      <summary><code>db_select()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2993033"><code>db_select()</code> is deprecated.</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/pdf/list_all_certificates.inc, line 61</li>
+              <li>modules/custom/textbook_companion/pdf/verify_certificates.inc, line 80</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 11</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 50</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 63</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 76</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 125</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 173</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 286</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 376</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 543</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 650</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 739</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 801</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 826</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 837</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 848</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1348</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1362</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1376</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1483</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1566</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1604</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1643</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1744</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1808</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1833</li>
+              <li>modules/custom/textbook_companion/pdf/generate_pdf.inc, line 96</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 12</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 239</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 274</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 310</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 348</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 362</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 472</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 478</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 497</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 542</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 552</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 581</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 661</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 891</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1066</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1081</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1099</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1110</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1193</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1203</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1342</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1416</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 18</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 46</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 86</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 103</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 127</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 576</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 601</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 618</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 642</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 725</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 802</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 879</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 955</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1033</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1134</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1177</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1198</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1265</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1308</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1329</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1365</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1387</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 16</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 34</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 46</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 82</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 94</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 162</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 182</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 193</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 205</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 242</li>
+              <li>modules/custom/textbook_companion/full_download.inc, line 254</li>
+              <li>modules/custom/textbook_companion/code.inc, line 18</li>
+              <li>modules/custom/textbook_companion/code.inc, line 61</li>
+              <li>modules/custom/textbook_companion/code.inc, line 377</li>
+              <li>modules/custom/textbook_companion/code.inc, line 421</li>
+              <li>modules/custom/textbook_companion/code.inc, line 449</li>
+              <li>modules/custom/textbook_companion/code.inc, line 490</li>
+              <li>modules/custom/textbook_companion/code.inc, line 657</li>
+              <li>modules/custom/textbook_companion/code.inc, line 679</li>
+              <li>modules/custom/textbook_companion/code.inc, line 696</li>
+              <li>modules/custom/textbook_companion/code.inc, line 713</li>
+              <li>modules/custom/textbook_companion/code.inc, line 768</li>
+              <li>modules/custom/textbook_companion/code.inc, line 792</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 890</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 940</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1003</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 1058</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2054</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2071</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2083</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2095</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2167</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2177</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2189</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2201</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2315</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2326</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2379</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2389</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2442</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2453</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2503</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2513</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2569</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2576</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2583</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2619</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2626</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2633</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2669</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2676</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2683</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2717</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2724</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2731</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2766</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 2773</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3007</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3028</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3045</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3106</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3121</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3138</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3247</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3263</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3326</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3341</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3362</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3915</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3928</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3940</li>
+              <li>modules/custom/textbook_companion/textbook_companion.module, line 3952</li>
+              <li>modules/custom/textbook_companion/cheque_manage.inc, line 27</li>
+              <li>modules/custom/textbook_companion/cheque_manage.inc, line 42</li>
+              <li>modules/custom/textbook_companion/cheque_manage.inc, line 53</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 118</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 127</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 137</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 146</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 156</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 203</li>
+              <li>modules/custom/textbook_companion/dependency_approval.inc, line 225</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 17</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 43</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 97</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 123</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 168</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 32</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 75</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 89</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 101</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 111</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 124</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 145</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 154</li>
+              <li>modules/custom/textbook_companion/latex.inc, line 183</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 10</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 33</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 44</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 73</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 85</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 96</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 143</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 204</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 212</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 221</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 230</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 484</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 492</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 509</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 517</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 572</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 580</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 635</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 698</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 747</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 805</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 812</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 857</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 864</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 906</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 913</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 972</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 979</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 986</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1032</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1039</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1046</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1095</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1102</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1109</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1183</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1208</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1230</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1379</li>
+              <li>modules/custom/textbook_companion/run.inc, line 7</li>
+              <li>modules/custom/textbook_companion/run.inc, line 294</li>
+              <li>modules/custom/textbook_companion/run.inc, line 407</li>
+              <li>modules/custom/textbook_companion/run.inc, line 412</li>
+              <li>modules/custom/textbook_companion/run.inc, line 432</li>
+              <li>modules/custom/textbook_companion/run.inc, line 453</li>
+              <li>modules/custom/textbook_companion/run.inc, line 472</li>
+              <li>modules/custom/textbook_companion/run.inc, line 486</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 13</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 55</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 133</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 161</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 188</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 231</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 338</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 384</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 427</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 451</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 528</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 556</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 600</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 639</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 742</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 785</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 812</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 862</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 882</li>
+              <li>modules/custom/textbook_companion/download.inc, line 12</li>
+              <li>modules/custom/textbook_companion/download.inc, line 32</li>
+              <li>modules/custom/textbook_companion/download.inc, line 56</li>
+              <li>modules/custom/textbook_companion/download.inc, line 82</li>
+              <li>modules/custom/textbook_companion/download.inc, line 91</li>
+              <li>modules/custom/textbook_companion/download.inc, line 99</li>
+              <li>modules/custom/textbook_companion/download.inc, line 168</li>
+              <li>modules/custom/textbook_companion/download.inc, line 186</li>
+              <li>modules/custom/textbook_companion/download.inc, line 198</li>
+              <li>modules/custom/textbook_companion/download.inc, line 257</li>
+              <li>modules/custom/textbook_companion/download.inc, line 275</li>
+              <li>modules/custom/textbook_companion/download.inc, line 286</li>
+              <li>modules/custom/textbook_companion/download.inc, line 297</li>
+              <li>modules/custom/textbook_companion/general.inc, line 13</li>
+              <li>modules/custom/textbook_companion/general.inc, line 56</li>
+              <li>modules/custom/textbook_companion/general.inc, line 82</li>
+              <li>modules/custom/textbook_companion/general.inc, line 95</li>
+              <li>modules/custom/textbook_companion/general.inc, line 125</li>
+              <li>modules/custom/textbook_companion/general.inc, line 168</li>
+              <li>modules/custom/textbook_companion/general.inc, line 189</li>
+              <li>modules/custom/textbook_companion/general.inc, line 219</li>
+              <li>modules/custom/textbook_companion/general.inc, line 240</li>
+              <li>modules/custom/textbook_companion/search.inc, line 44</li>
+              <li>modules/custom/textbook_companion/search.inc, line 56</li>
+              <li>modules/custom/textbook_companion/search.inc, line 65</li>
+              <li>modules/custom/textbook_companion/search.inc, line 116</li>
+              <li>modules/custom/textbook_companion/search.inc, line 150</li>
+              <li>modules/custom/textbook_companion/search.inc, line 216</li>
+              <li>modules/custom/textbook_companion/search.inc, line 257</li>
+              <li>modules/custom/textbook_companion/search.inc, line 279</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 17</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 40</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 80</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 98</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 116</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 557</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 576</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 594</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 611</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 691</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 768</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 847</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 924</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1002</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1098</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 1121</li>
+            </ul>
+                  <aside>Flagged by _function_call:db_select</aside>    </details>
+    <details class="error">
+      <summary><code>db_update()</code> has been removed.</summary>
+
+      
+            <h5>Documentation</h5>
+      <ul>
+                <li><a target="_blank" href="https://www.drupal.org/node/2993033"><code>db_update()</code> is deprecated.</a></li>
+              </ul>
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 404</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 416</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 470</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 481</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 757</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1307</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1400</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1426</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1452</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1581</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1715</li>
+              <li>modules/custom/textbook_companion/manage_proposal.inc, line 1763</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 81</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 964</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 990</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1012</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1025</li>
+              <li>modules/custom/textbook_companion/cheque_contact.inc, line 1363</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 680</li>
+              <li>modules/custom/textbook_companion/editcode.inc, line 1344</li>
+              <li>modules/custom/textbook_companion/code.inc, line 478</li>
+              <li>modules/custom/textbook_companion/notes.inc, line 135</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 246</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 526</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 588</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 819</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 871</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 993</li>
+              <li>modules/custom/textbook_companion/code_approval.inc, line 1052</li>
+              <li>modules/custom/textbook_companion/dependency.inc, line 675</li>
+              <li>modules/custom/textbook_companion/editcodeadmin.inc, line 644</li>
+            </ul>
+                  <aside>Flagged by _function_call:db_update</aside>    </details>
+    <details class="warning">
+      <summary>Default configuration is deleted automatically.</summary>
+
+      
+      
+            <h5>Files Affected</h5>
+      <ul>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 25</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 26</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 27</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 28</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 29</li>
+              <li>modules/custom/textbook_companion/textbook_companion.install, line 30</li>
+            </ul>
+                  <aside>Flagged by hook_uninstall</aside>    </details>
+
+    </details>
+    </body>
+</html>

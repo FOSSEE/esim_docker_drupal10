@@ -1,0 +1,30 @@
+hackathon_submission.display_all_submissions:
+  route_name: hackathon_submission.display_all_submissions
+  title: 'List of all Literature survey submissions'
+  weight: 1
+  base_route: hackathon_submission.display_final_submissions
+hackathon_submission.display_final_submissions:
+  route_name: hackathon_submission.display_final_submissions
+  title: 'List of all Final submissions'
+  weight: 0
+  base_route: hackathon_submission.display_final_submissions
+hackathon_submission.mscd_display_literature_submissions:
+  route_name: hackathon_submission.mscd_display_literature_submissions
+  title: 'List of all MSCD Literature survey submissions'
+  weight: 1
+  base_route: hackathon_submission.mscd_display_final_submissions
+hackathon_submission.mscd_display_final_submissions:
+  route_name: hackathon_submission.mscd_display_final_submissions
+  title: 'List of all MSCD Final submissions'
+  weight: 0
+  base_route: hackathon_submission.mscd_display_final_submissions
+hackathon_submission.soc_marathon_display_literature_submissions:
+  route_name: hackathon_submission.soc_marathon_display_literature_submissions
+  title: 'List of all Mixed Signal SoC Design Marathon Literature survey submissions'
+  weight: 1
+  base_route: hackathon_submission.soc_marathon_display_final_submissions
+hackathon_submission.soc_marathon_display_final_submissions:
+  route_name: hackathon_submission.soc_marathon_display_final_submissions
+  title: 'List of all Mixed Signal SoC Design Marathon Final submissions'
+  weight: 0
+  base_route: hackathon_submission.soc_marathon_display_final_submissions

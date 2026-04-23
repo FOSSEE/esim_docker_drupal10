@@ -1,0 +1,13 @@
+name: Announcements
+description: 'Manage site announcement display.'
+type: module
+package: Announcements
+core_version_requirement: ^10.1 || ^11 || ^12
+dependencies:
+  - js_cookie:js_cookie
+  - condition_field:condition_field
+
+# Information added by Drupal.org packaging script on 2025-10-13
+version: '2.0.0-rc2'
+project: 'announcements'
+datestamp: 1760372994

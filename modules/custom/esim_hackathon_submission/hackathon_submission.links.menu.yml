@@ -1,0 +1,76 @@
+hackathon_submission.display_my_submissions:
+  route_name: hackathon_submission.display_my_submissions
+  title: 'List of my submissions'
+hackathon_submission.completed_circuits:
+  route_name: hackathon_submission.completed_circuits
+  title: 'Completed Circuits'
+hackathon_submission.display_final_submissions:
+  route_name: hackathon_submission.display_final_submissions
+  title: 'List of all submissions'
+hackathon_submission.display_all_submissions:
+  route_name: hackathon_submission.display_all_submissions
+  title: 'List of all Literature survey submissions'
+  weight: 1
+hackathon_submission.display_final_submissions_0:
+  route_name: hackathon_submission.display_final_submissions
+  title: 'List of all Final submissions'
+  weight: 0
+hackathon_submission.view_final_submissions_details_form:
+  route_name: hackathon_submission.view_final_submissions_details_form
+  title: 'View submission details'
+hackathon_submission.settings_form:
+  route_name: hackathon_submission.settings_form
+  title: 'Hackathon submission Settings'
+  description: 'Hackathon submission Settings'
+hackathon_submission.add_mscd_literature_report_submission:
+  route_name: hackathon_submission.add_mscd_literature_report_submission
+  title: 'Mixed Signal Circuit Design and Simulation Marathon Submission'
+hackathon_submission.add_mscd_final_report_submission:
+  route_name: hackathon_submission.add_mscd_final_report_submission
+  title: 'CSMD Final submission'
+hackathon_submission.mscd_submission_display_my_submissions:
+  route_name: hackathon_submission.mscd_submission_display_my_submissions
+  title: 'Mixed Signal Design  Marathon - List of my submissions'
+hackathon_submission.view_mscd_literature_report_submission_form:
+  route_name: hackathon_submission.view_mscd_literature_report_submission_form
+  title: 'View Mixed Signal Marathon Literature report'
+hackathon_submission.view_mscd_final_submission_form:
+  route_name: hackathon_submission.view_mscd_final_submission_form
+  title: 'View Mixed Signal Marathon Literature report'
+hackathon_submission.mscd_display_final_submissions:
+  route_name: hackathon_submission.mscd_display_final_submissions
+  title: 'List of all MSCD submissions'
+hackathon_submission.mscd_display_literature_submissions:
+  route_name: hackathon_submission.mscd_display_literature_submissions
+  title: 'List of all MSCD Literature survey submissions'
+  weight: 1
+hackathon_submission.mscd_display_final_submissions_0:
+  route_name: hackathon_submission.mscd_display_final_submissions
+  title: 'List of all MSCD Final submissions'
+  weight: 0
+hackathon_submission.add_soc_literature_report_submission:
+  route_name: hackathon_submission.add_soc_literature_report_submission
+  title: 'Mixed Signal SoC Design Marathon Submission'
+hackathon_submission.soc_marathon_submission_display_my_submissions:
+  route_name: hackathon_submission.soc_marathon_submission_display_my_submissions
+  title: 'Mixed Signal SoC Design  Marathon - List of my submissions'
+hackathon_submission.view_soc_marathon_literature_report_submission_form:
+  route_name: hackathon_submission.view_soc_marathon_literature_report_submission_form
+  title: 'View Mixed Signal SoC Design Marathon Literature report'
+hackathon_submission.soc_marathon_display_final_submissions:
+  route_name: hackathon_submission.soc_marathon_display_final_submissions
+  title: 'List of all Mixed Signal SoC Design Marathon submissions'
+hackathon_submission.soc_marathon_display_literature_submissions:
+  route_name: hackathon_submission.soc_marathon_display_literature_submissions
+  title: 'List of all Mixed Signal SoC Design Marathon Literature survey submissions'
+  weight: 1
+hackathon_submission.soc_marathon_display_final_submissions_0:
+  route_name: hackathon_submission.soc_marathon_display_final_submissions
+  title: 'List of all Mixed Signal SoC Design Marathon Final submissions'
+  weight: 0
+hackathon_submission.soc_marathon_download_emails:
+  route_name: hackathon_submission.soc_marathon_download_emails
+  title: 'Download SoC marathon participants emails'
+hackathon_submission.add_soc_marathon_final_report_submission:
+  route_name: hackathon_submission.add_soc_marathon_final_report_submission
+  title: 'Mixed Signal SoC Design Marathon Final submission'

@@ -1,0 +1,33 @@
+lab_migration.proposal_form:
+  route_name: lab_migration.proposal_form
+  title: 'Lab Migration Proposal'
+  description: 'Lab Migration Proposal'
+lab_migration.proposal_open:
+  route_name: lab_migration.proposal_open
+  title: 'Lab Migration Solve'
+  description: 'Lab Migration Proposal Open For Solution'
+lab_migration.completed_labs_all:
+  route_name: lab_migration.completed_labs_all
+  title: 'Completed Labs'
+lab_migration.labs_progress_all:
+  route_name: lab_migration.labs_progress_all
+  title: 'Labs in Progress'
+lab_migration.settings_form:
+  route_name: lab_migration.settings_form
+  title: 'Lab Migration Settings'
+  description: 'Lab Migration Settings'
+lab_migration._list_all_lm_certificates:
+  route_name: lab_migration._list_all_lm_certificates
+  title: 'List Of All Certificates LM'
+  description: 'List of all available lab migration certificates'
+lab_migration.certificate_participation_form:
+  route_name: lab_migration.certificate_participation_form
+  title: 'Create Certificates for Participation'
+lab_migration.certificate_participation_edit_form:
+  route_name: lab_migration.certificate_participation_edit_form
+  title: 'Edit Certificates for Participation'
+  parent: lab_migration.certificate_participation_form
+lab_migration.verify_lab_migration_certificates_verify_lab_migration_certificates:
+  route_name: lab_migration.verify_lab_migration_certificates_verify_lab_migration_certificates
+  title: 'Lab Migration Certificate Verification'
+  parent: lab_migration._list_all_lm_certificates

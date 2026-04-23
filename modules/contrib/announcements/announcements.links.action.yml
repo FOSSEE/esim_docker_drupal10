@@ -1,0 +1,20 @@
+entity.announcements_region.add_form:
+  route_name: entity.announcements_region.add_form
+  title: 'Add Announcement Region'
+  appears_on:
+    - entity.announcements_region.collection
+entity.announcements_announcement.add_form:
+  route_name: entity.announcements_announcement.add_page
+  title: 'Add Announcement'
+  appears_on:
+    - entity.announcements_announcement.collection
+entity.announcements_type.add_form:
+  route_name: entity.announcements_type.add_form
+  title: 'Add Announcement type'
+  appears_on:
+    - entity.announcements_type.collection
+entity.announcements_style.add_form:
+  route_name: entity.announcements_style.add_form
+  title: 'Add Announcement Style'
+  appears_on:
+    - entity.announcements_style.collection

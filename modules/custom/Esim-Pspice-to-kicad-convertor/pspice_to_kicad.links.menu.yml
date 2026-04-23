@@ -1,0 +1,28 @@
+pspice_to_kicad.list:
+  title: 'PSPICE to KICAD Files'
+  description: 'List of converted PSPICE files'
+  route_name: pspice_to_kicad.list
+  menu_name: main
+
+pspice_to_kicad.add:
+  title: 'Upload PSPICE File'
+  route_name: pspice_to_kicad.add
+  menu_name: main
+  weight: 1
+
+pspice_to_kicad.your_upload:
+  title: 'My Uploaded Files'
+  route_name: pspice_to_kicad.your_upload
+  menu_name: main
+  weight: 2
+
+pspice_to_kicad.convert_list:
+  title: 'Files to Be Converted'
+  route_name: pspice_to_kicad.convert_list
+  parent: system.admin_content
+  weight: 10
+
+pspice_to_kicad.settings:
+  title: 'Pspice to Kicad Settings'
+  route_name: pspice_to_kicad.settings
+  parent: system.admin_config

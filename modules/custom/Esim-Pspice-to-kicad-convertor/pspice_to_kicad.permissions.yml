@@ -1,0 +1,14 @@
+'access pspice_to_kicad':
+  title: 'Access pspice_to_kicad'
+  description: 'Allows users to view converted.'
+'manage pspice_to_kicad':
+  title: 'Upload pspice_to_kicad Files'
+  description: 'Allows users to upload files for pspice to kicad convertor.'
+'convert pspice_to_kicad':
+  title: 'Files to be converted'
+  description: 'Allows admin to see files to be convert from pspice to kicad.'
+'delete pspice_to_kicad file':
+  title: 'Files to be deleted'
+  description: 'Allows admin to delete files from pspice to kicad.'
+
+

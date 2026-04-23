@@ -1,0 +1,37 @@
+announcements.structure:
+  title: 'Announcements'
+  route_name: announcements.structure
+  description: 'Announcement Configuration'
+  parent: system.admin_structure
+
+# Announcement Region menu items definition
+entity.announcements_region.collection:
+  title: 'Regions'
+  route_name: entity.announcements_region.collection
+  description: 'List Announcement Regions'
+  parent: announcements.structure
+  weight: 3
+
+
+# Announcement type menu items definition
+entity.announcements_type.collection:
+  title: 'Types'
+  route_name: entity.announcements_type.collection
+  description: 'List Announcement type (bundles)'
+  parent: announcements.structure
+  weight: 1
+
+# Announcement Style menu items definition
+entity.announcements_style.collection:
+  title: 'Styles'
+  route_name: entity.announcements_style.collection
+  description: 'List Announcement Styles'
+  parent: announcements.structure
+  weight: 2
+
+# Announcement menu items definition
+entity.announcements_announcement.collection:
+  title: 'Announcements'
+  route_name: entity.announcements_announcement.collection
+  description: 'List Announcement entities'
+  parent: system.admin_content

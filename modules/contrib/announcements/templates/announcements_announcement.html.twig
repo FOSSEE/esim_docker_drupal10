@@ -1,0 +1,28 @@
+{#
+/**
+ * @file announcements.html.twig
+ * Default theme implementation to present Announcement data.
+ *
+ * This template is used when viewing Announcement pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_announcements()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('announcements-announcement') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+
+  {% if dismissible %}
+    <button type="button" class="close" data-dismiss="announcements-announcement" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  {% endif %}
+</div>
