@@ -652,235 +652,138 @@ else {
 }
 
 
-//   public function lab_migration_upload_code_delete() {
-//     $user = \Drupal::currentUser();
 
-//     $root_path = \Drupal::service('lab_migration_global')->lab_migration_path();
-//     // $solution_id = (int) arg(3);
-//         $route_match = \Drupal::routeMatch();
-//     $solution_id = (int) $route_match->getParameter('solution_id');
+  public function lab_migration_upload_code_delete() {
+    $user = \Drupal::currentUser();
+    
+    $route_match = \Drupal::routeMatch();
 
+    $solution_id = (int) $route_match->getParameter('solution_id');
+    
 
-//     /* check solution */
-//     // $solution_q = \Drupal::database()->query("SELECT * FROM {lab_migration_solution} WHERE id = %d LIMIT 1", $solution_id);
-//     $query = \Drupal::database()->select('lab_migration_solution');
-//     $query->fields('lab_migration_solution');
-//     $query->condition('id', $solution_id);
-//     $query->range(0, 1);
-//     $solution_q = $query->execute();
-//     $solution_data = $solution_q->fetchObject();
-//     if (!$solution_data) {
-//       \Drupal::messenger()->addMessage('Invalid solution.', 'error');
-//       // drupal_goto('lab_migration/code');
-//       return;
-//     }
-//     if ($solution_data->approval_status != 0) {
-//       \Drupal::messenger()->addMessage('You cannnot delete a solution after it has been approved. Please contact site administrator if you want to delete this solution.', 'error');
-//       // drupal_goto('lab_migration/code');
-//       return;
-//     }
+    /* check solution */
+    // $solution_q = \Drupal::database()->query("SELECT * FROM {lab_migration_solution} WHERE id = %d LIMIT 1", $solution_id);
+    $query = \Drupal::database()->select('lab_migration_solution');
+    $query->fields('lab_migration_solution');
+    $query->condition('id', $solution_id);
+    $query->range(0, 1);
+    $solution_q = $query->execute();
+    $solution_data = $solution_q->fetchObject();
+    if (!$solution_data) {
+      \Drupal::messenger()->addMessage('Invalid solution.', 'error');
+      // RedirectResponse('lab-migration/code');
+      // return new RedirectResponse('/lab-migration/code/list-experiments');
+      // $response = new RedirectResponse(Url::fromRoute('/lab-migration/code/list-experiments')->toString());
+      // Send the redirect response
+      $response = new TrustedRedirectResponse(
+  Url::fromUserInput('/lab-migration/code/list-experiments')->toString()
+);
+         $response->send();
 
-//     //$experiment_q = \Drupal::database()->query("SELECT * FROM {lab_migration_experiment} WHERE id = %d LIMIT 1", $solution_data->experiment_id);
-//     $query = \Drupal::database()->select('lab_migration_experiment');
-//     $query->fields('lab_migration_experiment');
-//     $query->condition('id', $solution_data->experiment_id);
-//     $query->range(0, 1);
-//     $experiment_q = $query->execute();
-
-//     $experiment_data = $experiment_q->fetchObject();
-//     if (!$experiment_data) {
-//       \Drupal::messenger()->addMessage('You do not have permission to delete this solution.', 'error');
-//       // drupal_goto('lab_migration/code');
-//       return;
-//     }
-
-//     //$proposal_q = \Drupal::database()->query("SELECT * FROM {lab_migration_proposal} WHERE id = %d AND solution_provider_uid = %d LIMIT 1", $experiment_data->proposal_id, $user->uid);
-//     $query = \Drupal::database()->select('lab_migration_proposal');
-//     $query->fields('lab_migration_proposal');
-//     $query->condition('id', $experiment_data->proposal_id);
-//     $query->condition('solution_provider_uid', $user->uid);
-//     $query->range(0, 1);
-//     $proposal_q = $query->execute();
-//     $proposal_data = $proposal_q->fetchObject();
-//     if (!$proposal_data) {
-//       \Drupal::messenger()->addMessage('You do not have permission to delete this solution.', 'error');
-//       // drupal_goto('lab_migration/code');
-//       return;
-//     }
-
-//     /* deleting solution files */
-//     if (lab_migration_delete_solution($solution_data->id)) {
-//       \Drupal::messenger()->addMessage('Solution deleted.', 'status');
-
-//       /* sending email */
-//            $user_data = User::load($user->uid);
-// $email_to = $user->getEmail();
-
-// $config = \Drupal::config('lab_migration.settings');
-
-// $from = $config->get('lab_migration_from_email');
-// $bcc  = $config->get('lab_migration_emails');
-// $cc   = $config->get('lab_migration_cc_emails');
-
-// $param['solution_deleted_user']['solution_id'] = $proposal_data->id;
-// $param['solution_deleted_user']['lab_title'] = $proposal_data->lab_title;
-// $param['solution_deleted_user']['experiment_title'] = $experiment_data->title;
-// $param['solution_deleted_user']['solution_number'] = $solution_data->code_number;
-// $param['solution_deleted_user']['solution_caption'] = $solution_data->caption;
-// $param['solution_deleted_user']['user_id'] = $user->id();
-
-// // Ensure CC and BCC are strings
-// $cc  = is_array($cc)  ? implode(',', $cc)  : $cc;
-// $bcc = is_array($bcc) ? implode(',', $bcc) : $bcc;
-
-// $param['solution_deleted_user']['headers'] = [
-//   'From' => $from,
-//   'MIME-Version' => '1.0',
-//   'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
-//   'Content-Transfer-Encoding' => '8Bit',
-//   'X-Mailer' => 'Drupal',
-//   'Cc' => $cc,
-//   'Bcc' => $bcc,
-// ];
-
-// $langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
-// $mail_manager = \Drupal::service('plugin.manager.mail');
-
-// $result = $mail_manager->mail(
-//   'lab_migration',
-//   'solution_deleted_user',
-//   $email_to,
-//   $langcode,
-//   $param,
-//   NULL,
-//   TRUE
-// );
-
-// if (!$result['result']) {
-//   \Drupal::messenger()->addError('Error sending email message.');
-// }
-//         }
-//             $response = new RedirectResponse(Url::fromRoute('lab_migration.list_experiments')->toString());
-  
-//   // Send the redirect response
-//   $response->send();
-//     //RedirectResponse('lab-migration/code');
-//     return;
-//   }
-
-
-public function lab_migration_upload_code_delete() {
-
-  $current_user = \Drupal::currentUser();
-  $database = \Drupal::database();
-  $config = \Drupal::config('lab_migration.settings');
-  $mail_manager = \Drupal::service('plugin.manager.mail');
-
-  $root_path = \Drupal::service('lab_migration_global')->lab_migration_path();
-
-  /* Get solution_id from route */
-  $solution_id = (int) \Drupal::routeMatch()->getParameter('solution_id');
-
-  /* Load solution */
-  $solution_data = $database->select('lab_migration_solution', 's')
-    ->fields('s')
-    ->condition('id', $solution_id)
-    ->range(0, 1)
-    ->execute()
-    ->fetchObject();
-
-  if (!$solution_data) {
-    \Drupal::messenger()->addError('Invalid solution.');
-    return;
-  }
-
-  if ($solution_data->approval_status != 0) {
-    \Drupal::messenger()->addError('You cannot delete a solution after it has been approved. Please contact administrator.');
-    return;
-  }
-
-  /* Load experiment */
-  $experiment_data = $database->select('lab_migration_experiment', 'e')
-    ->fields('e')
-    ->condition('id', $solution_data->experiment_id)
-    ->range(0, 1)
-    ->execute()
-    ->fetchObject();
-
-  if (!$experiment_data) {
-    \Drupal::messenger()->addError('Invalid experiment.');
-    return;
-  }
-
-  /* Check ownership */
-  $proposal_data = $database->select('lab_migration_proposal', 'p')
-    ->fields('p')
-    ->condition('id', $experiment_data->proposal_id)
-    ->condition('solution_provider_uid', $current_user->id()) // ✅ FIXED
-    ->range(0, 1)
-    ->execute()
-    ->fetchObject();
-
-  if (!$proposal_data) {
-    \Drupal::messenger()->addError('You do not have permission to delete this solution.');
-    return;
-  }
-
-  /* Delete solution */
-  if (\Drupal::service("lab_migration_global")->lab_migration_delete_solution($solution_data->id)) {
-
-    \Drupal::messenger()->addStatus('Solution deleted.');
-
-    /* Load full user entity for email */
-    $user_entity = User::load($current_user->id());
-    $email_to = $user_entity->getEmail();
-
-    /* Mail config */
-    $from = $config->get('lab_migration_from_email');
-    $bcc  = $config->get('lab_migration_emails');
-    $cc   = $config->get('lab_migration_cc_emails');
-
-    $cc  = is_array($cc)  ? implode(',', $cc)  : $cc;
-    $bcc = is_array($bcc) ? implode(',', $bcc) : $bcc;
-
-    /* Prepare params (FLAT structure) */
-    $params = [
-      'solution_id' => $proposal_data->id,
-      'lab_title' => $proposal_data->lab_title,
-      'experiment_title' => $experiment_data->title,
-      'solution_number' => $solution_data->code_number,
-      'solution_caption' => $solution_data->caption,
-      'user_id' => $current_user->id(),
-      'headers' => [
-        'From' => $from,
-        'Cc' => $cc,
-        'Bcc' => $bcc,
-      ],
-    ];
-
-    $langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
-
-    $result = $mail_manager->mail(
-      'lab_migration',
-      'solution_deleted_user',
-      $email_to,
-      $langcode,
-      $params,
-      $from
-    );
-
-    if (!$result['result']) {
-      \Drupal::messenger()->addError('Error sending email.');
+      return;
     }
-  }
+    if ($solution_data->approval_status != 0) {
+      \Drupal::messenger()->addMessage('You cannnot delete a solution after it has been approved. Please contact site administrator if you want to delete this solution.', 'error');
+      // RedirectResponse('lab-migration/code');
+       // RedirectResponse('lab-migration/code-approval');
+    $response = new RedirectResponse(Url::fromRoute('lab_migration.code_approval')->toString());
+  
+    // Send the redirect response
+    $response->send();
+      return;
+    }
 
-  /* Redirect */
-  $response = new RedirectResponse(
-    Url::fromRoute('lab_migration.list_experiments')->toString()
-  );
-  $response->send();
+    //$experiment_q = \Drupal::database()->query("SELECT * FROM {lab_migration_experiment} WHERE id = %d LIMIT 1", $solution_data->experiment_id);
+    $query = \Drupal::database()->select('lab_migration_experiment');
+    $query->fields('lab_migration_experiment');
+    $query->condition('id', $solution_data->experiment_id);
+    $query->range(0, 1);
+    $experiment_q = $query->execute();
+
+    $experiment_data = $experiment_q->fetchObject();
+    if (!$experiment_data) {
+      // \Drupal::messenger()->addMessage('You do not have permission to delete this solution.', 'error');
+      RedirectResponse('lab-migration/code');
+      return;
+    }
+
+    //$proposal_q = \Drupal::database()->query("SELECT * FROM {lab_migration_proposal} WHERE id = %d AND solution_provider_uid = %d LIMIT 1", $experiment_data->proposal_id, $user->uid);
+    $query = \Drupal::database()->select('lab_migration_proposal');
+    $query->fields('lab_migration_proposal');
+    $query->condition('id', $experiment_data->proposal_id);
+    $query->condition('solution_provider_uid', $user->uid);
+    $query->range(0, 1);
+    $proposal_q = $query->execute();
+    $proposal_data = $proposal_q->fetchObject();
+    
+    // if (!$proposal_data) {
+    //   \Drupal::messenger()->addMessage('You do not have permission to delete this solution.', 'error');
+
+    //   RedirectResponse('lab-migration/code');
+    //   return;
+    // }
+
+    /* deleting solution files */
+    if (\Drupal::service("lab_migration_global")->lab_migration_delete_solution($solution_data->id)) {
+      \Drupal::messenger()->addMessage('Solution deleted.', 'status');
+
+      /* sending email */
+     $user_data = User::load($user->uid);
+$email_to = $user->getEmail();
+
+$config = \Drupal::config('lab_migration.settings');
+
+$from = $config->get('lab_migration_from_email');
+$bcc  = $config->get('lab_migration_emails');
+$cc   = $config->get('lab_migration_cc_emails');
+
+$param['solution_deleted_user']['solution_id'] = $proposal_data->id;
+$param['solution_deleted_user']['lab_title'] = $proposal_data->lab_title;
+$param['solution_deleted_user']['experiment_title'] = $experiment_data->title;
+$param['solution_deleted_user']['solution_number'] = $solution_data->code_number;
+$param['solution_deleted_user']['solution_caption'] = $solution_data->caption;
+$param['solution_deleted_user']['user_id'] = $user->id();
+
+// Ensure CC and BCC are strings
+$cc  = is_array($cc)  ? implode(',', $cc)  : $cc;
+$bcc = is_array($bcc) ? implode(',', $bcc) : $bcc;
+
+$param['solution_deleted_user']['headers'] = [
+  'From' => $from,
+  'MIME-Version' => '1.0',
+  'Content-Type' => 'text/plain; charset=UTF-8; format=flowed; delsp=yes',
+  'Content-Transfer-Encoding' => '8Bit',
+  'X-Mailer' => 'Drupal',
+  'Cc' => $cc,
+  'Bcc' => $bcc,
+];
+
+$langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
+$mail_manager = \Drupal::service('plugin.manager.mail');
+
+$result = $mail_manager->mail(
+  'lab_migration',
+  'solution_deleted_user',
+  $email_to,
+  $langcode,
+  $param,
+  NULL,
+  TRUE
+);
+
+if (!$result['result']) {
+  \Drupal::messenger()->addError('Error sending email message.');
 }
-
+        }
+            $response = new RedirectResponse(Url::fromRoute('lab_migration.list_experiments')->toString());
+  
+  // Send the redirect response
+  $response->send();
+    //RedirectResponse('lab-migration/code');
+    return;
+  }  
+  
+  
   public function lab_migration_download_solution_file() {
     // $solution_file_id = arg(3);
     $route_match = \Drupal::routeMatch();
@@ -1612,13 +1515,20 @@ return new RedirectResponse($url);
     }
   }
 
-  public function lab_migration_delete_lab_pdf() {
-    $lab_id = arg(3);
-    lab_migration_del_lab_pdf($lab_id);
-    \Drupal::messenger()->addMessage(t('Lab schedule for regeneration.'), 'status');
-    // drupal_goto('lab_migration/code_approval/bulk');
-    return;
-  }
+public function lab_migration_delete_lab_pdf() {
+
+  $route_match = \Drupal::routeMatch();
+  $lab_id = (int) $route_match->getParameter('lab_id');
+
+  \Drupal::service('lab_migration_global')
+    ->lab_migration_delete_lab_pdf($lab_id);
+
+  \Drupal::messenger()->addStatus($this->t('Lab scheduled for regeneration.'));
+
+  return new RedirectResponse(
+    Url::fromUserInput('/lab_migration/code_approval/bulk')->toString()
+  );
+}
 
   public function _list_lab_migration_certificates() {
     $user = \Drupal::currentUser();

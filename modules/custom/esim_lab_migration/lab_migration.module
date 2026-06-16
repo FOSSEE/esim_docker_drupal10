@@ -76,22 +76,22 @@ function lab_migration_mail($key, &$message, $params) {
       );
 
       $message['body'][] = t(
-        'Dear @name,<br><br>
+        'Dear @name,
 
 We have received your proposal for lab migration with the following details:<br><br>
 
-<b>Full Name:</b> @full_name<br>
-<b>Email:</b> @email<br><br>
+<b>Full Name:</b> @full_name
+<b>Email:</b> @email
 
-<b>Solution Provided By:</b> @solution<br><br>
+<b>Solution Provided By:</b> @solution
 
-<b>List of experiments:</b><br>
-@experiments<br><br>
+<b>List of experiments:
+@experiments
 
-The proposal is under review. You will be notified of the decision.<br><br>
+The proposal is under review. You will be notified of the decision.
 
-Best Wishes,<br>
-@site Team<br>
+Best Wishes,
+@site Team
 FOSSEE, IIT Bombay',
         [
           '@name' => $proposal_data->name,
@@ -389,16 +389,16 @@ case 'solution_disapproved':
   /* Load proposal */
   $proposal_data = \Drupal::database()->select('lab_migration_proposal', 'p')
     ->fields('p')
-    ->condition('id', $params['solution_id'])
+    ->condition('id', $params['solution_disapproved']['solution_id'])
     ->range(0, 1)
     ->execute()
     ->fetchObject();
 
   /* Load user */
-  $user_data = \Drupal\user\Entity\User::load($params['user_id']);
+  $user_data = User::load($params['solution_disapproved']['user_id']);
 
   /* Headers */
-  $message['headers'] = $params['headers'];
+  $message['headers'] = $params['solution_disapproved']['headers'];
 
   /* Subject */
   $site_name = \Drupal::config('system.site')->get('name');
@@ -407,19 +407,27 @@ case 'solution_disapproved':
   ]);
 
   /* Body */
-  $message['body'][] = t(
-    "Dear @name,\n\nYour following solution has been disapproved:\n\nSolution number: @solution_number\nCaption: @solution_caption\n\nReason for dis-approval:\n@reason\n\nBest Wishes,\n\n@site Team\nFOSSEE, IIT Bombay",
-    [
-      '@name' => $proposal_data->solution_provider_name ?? $user_data->getDisplayName(),
-      '@solution_number' => $params['solution_number'],
-      '@solution_caption' => $params['solution_caption'],
-      '@reason' => $params['message'],
-      '@site' => $site_name,
-    ]
-  );
+  $message['body'][] = t('
+Dear ' . $proposal_data->solution_provider_name . ',
+
+Your following solution has been disapproved:
+
+Solution number: ' . $params['solution_disapproved']['solution_number'] . '
+Caption: ' . $params['solution_disapproved']['solution_caption'] . '
+
+Reason for dis-approval:
+' . $params['solution_disapproved']['message'] . '
+
+Best Wishes,
+
+@site_name Team
+FOSSEE, IIT Bombay', [
+    '@site_name' => $site_name,
+    '@user_name' => $user_data->getDisplayName(),
+  ]);
 
   break;
-
+  
 case 'solution_deleted_user':
 
   /* Load proposal data */
@@ -456,13 +464,15 @@ Caption: ' . $params['solution_deleted_user']['solution_caption'] . '
 
 Best Wishes,
 
-@site Team
+@site_name Team
 FOSSEE, IIT Bombay', [
-    '@site' => $site_name,
+    '@site_name' => $site_name,
     '@user_name' => $user_data->getDisplayName(),
   ]);
 
   break;
+
+
 
 
 

@@ -521,17 +521,21 @@ $qr_code = (int) $route_match->getParameter('qr_code');
     $lab_solution_actions[3] = 'Dis-approve Solution (This will delete the solution)';
     return $lab_solution_actions;
   }
-  public function lab_migration_delete_lab_pdf() {
-    
-    $route_match = \Drupal::routeMatch();
 
-$lab_id = (int) $route_match->getParameter('lab_id');
-\Drupal::service("lab_migration_global")->lab_migration_del_lab_pdf($lab_id);
-    \Drupal::messenger()->addMessage(t('Lab schedule for regeneration.'), 'status');
-    RedirectResponse('lab_migration/code_approval/bulk');
-    return;
-  }
+public function lab_migration_delete_lab_pdf() {
 
+  $route_match = \Drupal::routeMatch();
+  $lab_id = (int) $route_match->getParameter('lab_id');
+
+  \Drupal::service('lab_migration_global')
+    ->lab_migration_delete_lab_pdf($lab_id);
+
+  \Drupal::messenger()->addStatus($this->t('Lab scheduled for regeneration.'));
+
+  return new RedirectResponse(
+    Url::fromUserInput('/lab_migration/code_approval/bulk')->toString()
+  );
+}
   public function lab_migration_delete_lab($lab_id)
 {
   $status = TRUE;
@@ -954,143 +958,78 @@ public function lab_migration_delete_experiment($experiment_id)
 
 
 public function lab_migration_delete_solution($solution_id) {
+    $current_user = \Drupal::currentUser();
+    $database = \Drupal::database();
+    $file_system = \Drupal::service('file_system');
+    $root_path = $this->lab_migration_path();
+    
+    // Ensure accurate root trail boundary endings
+    $root_path = rtrim($root_path, '/') . '/';
+    $status = TRUE;
 
-  $current_user = \Drupal::currentUser();
-  $database = \Drupal::database();
-  $config = \Drupal::config('lab_migration.settings');
-  $mail_manager = \Drupal::service('plugin.manager.mail');
-  $request = \Drupal::request();
-
-  $root_path =  \Drupal::service("lab_migration_global")->lab_migration_path();
-  $status = TRUE;
-
-  /* Load solution */
-  $solution_data = $database->select('lab_migration_solution', 's')
-    ->fields('s')
-    ->condition('id', $solution_id)
-    ->execute()
-    ->fetchObject();
-
-  if (!$solution_data) {
-    \Drupal::messenger()->addError(t('Invalid solution.'));
-    return FALSE;
-  }
-
-  /* Load experiment */
-  $experiment_data = $database->select('lab_migration_experiment', 'e')
-    ->fields('e')
-    ->condition('id', $solution_data->experiment_id)
-    ->execute()
-    ->fetchObject();
-
-  if (!$experiment_data) {
-    \Drupal::messenger()->addError(t('Invalid experiment.'));
-    return FALSE;
-  }
-
-  /* Mail config */
-  $email_to = $config->get('lab_migration_emails');
-  $from = $config->get('lab_migration_from_email');
-  $cc = $config->get('lab_migration_cc_emails');
-  $langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
-
-  /* Delete solution files */
-  $files = $database->select('lab_migration_solution_files', 'f')
-    ->fields('f')
-    ->condition('solution_id', $solution_id)
-    ->execute();
-
-  foreach ($files as $file) {
-
-    $file_path = $root_path . $file->filepath;
-    $pdf_path  = $root_path . $file->pdfpath;
-
-    if (!file_exists($file_path)) {
-      $status = FALSE;
-      \Drupal::messenger()->addError(t('File not found: @file', ['@file' => $file->filepath]));
-      continue;
+    // Load Data Objects
+    $solution_data = $database->select('lab_migration_solution', 's')->fields('s')->condition('id', $solution_id)->execute()->fetchObject();
+    if (!$solution_data) {
+        \Drupal::messenger()->addError(t('Invalid solution record selected.'));
+        return FALSE;
     }
 
-    /* Delete PDF */
-    $pdf_status = 'PDF not uploaded';
-    if (!empty($file->pdfpath) && file_exists($pdf_path)) {
-      if (!unlink($pdf_path)) {
-        \Drupal::messenger()->addError(t('Error deleting PDF: @file', ['@file' => $file->pdfpath]));
-      } else {
-        $pdf_status = $file->pdfpath;
-      }
+    $experiment_data = $database->select('lab_migration_experiment', 'e')->fields('e')->condition('id', $solution_data->experiment_id)->execute()->fetchObject();
+    $proposal_data = $database->select('lab_migration_proposal', 'p')->fields('p')->condition('id', $experiment_data->proposal_id)->execute()->fetchObject();
+
+    if (!$experiment_data || !$proposal_data) {
+        \Drupal::messenger()->addError(t('Mismatched dependency mapping trees found inside database layout.'));
+        return FALSE;
     }
 
-    /* Delete main file */
-    if (!unlink($file_path)) {
-
-      $status = FALSE;
-
-      \Drupal::messenger()->addError(t('Error deleting file: @file', ['@file' => $file->filepath]));
-
-      /* Send error mail */
-      $params = [
-        'subject' => '[ERROR] Error deleting solution file',
-        'body' => "Error deleting file\n\nUser: {$current_user->id()}\nURL: " . $request->getUri() . "\nSolution ID: {$solution_id}\nFile ID: {$file->id}\nFile: {$file->filepath}\nPDF: {$pdf_status}",
-        'headers' => [
-          'From' => $from,
-          'Cc' => is_array($cc) ? implode(',', $cc) : $cc,
-        ],
-      ];
-
-      $mail_manager->mail('lab_migration', 'standard', $email_to, $langcode, $params, $from);
-
-    } else {
-
-      /* Delete DB entry */
-      $database->delete('lab_migration_solution_files')
-        ->condition('id', $file->id)
+    /* 1. Unlink Storage Files Safely */
+    $solution_files_q = $database->select('lab_migration_solution_files', 'f')
+        ->fields('f')
+        ->condition('solution_id', $solution_id)
         ->execute();
+
+    while ($solution_files_data = $solution_files_q->fetchObject()) {
+        $dir_name = !empty($proposal_data->directory_name) ? trim($proposal_data->directory_name, '/') . '/' : '';
+        $file_sub_path = ltrim($solution_files_data->filepath, '/');
+        $full_file_path = $root_path . $dir_name . $file_sub_path;
+
+        if (file_exists($full_file_path)) {
+            try {
+                $file_system->unlink($full_file_path);
+            } catch (\Exception $e) {
+                $status = FALSE;
+                \Drupal::messenger()->addError(t('Could not unlink physical asset file: @file', ['@file' => $full_file_path]));
+            }
+        }
+        
+        // Always drop row reference even if missing from drive array
+        $database->delete('lab_migration_solution_files')->condition('id', $solution_files_data->id)->execute();
     }
-  }
 
-  if (!$status) {
-    return FALSE;
-  }
+    /* 2. Purge Target Directory Tree Wrapper Safely */
+    $dir_name = !empty($proposal_data->directory_name) ? trim($proposal_data->directory_name, '/') . '/' : '';
+    $dir_path = $root_path . $dir_name . 'EXP' . $experiment_data->number . '/CODE' . $solution_data->code_number;
+    $dir_path = rtrim($dir_path, '/');
 
-  /* Delete directory */
-  $dir_path = $root_path . $experiment_data->proposal_id . '/EXP' . $experiment_data->number . '/CODE' . $solution_data->code_number;
-
-  if (is_dir($dir_path)) {
-    if (!rmdir($dir_path)) {
-
-      \Drupal::messenger()->addError(t('Error deleting folder: @folder', ['@folder' => $dir_path]));
-
-      $params = [
-        'subject' => '[ERROR] Error deleting folder',
-        'body' => "Error deleting folder: {$dir_path}\nUser: {$current_user->id()}\nURL: " . $request->getUri(),
-        'headers' => [
-          'From' => $from,
-          'Cc' => is_array($cc) ? implode(',', $cc) : $cc,
-        ],
-      ];
-
-      $mail_manager->mail('lab_migration', 'standard', $email_to, $langcode, $params, $from);
-
-      return FALSE;
+    if (is_dir($dir_path)) {
+        try {
+            $file_system->rmdir($dir_path);
+        } catch (\Exception $e) {
+            \Drupal::messenger()->addWarning(t('Folder asset context could not be cleanly unlinked: @dir', ['@dir' => $dir_path]));
+        }
+    } else {
+        // Log clean trace statement instead of hard-failing form loops
+        \Drupal::logger('lab_migration')->notice(t('Directory folder @dir not present on filesystem. Cleaned up tracking database.', ['@dir' => $dir_path]));
     }
-  } else {
-    \Drupal::messenger()->addError(t('Folder does not exist: @folder', ['@folder' => $dir_path]));
-    return FALSE;
-  }
 
-  /* Delete DB entries */
-  $database->delete('lab_migration_solution_dependency')
-    ->condition('solution_id', $solution_id)
-    ->execute();
+    /* 3. Force Database Table Record Cleanups */
+    $database->delete('lab_migration_solution_dependency')->condition('solution_id', $solution_id)->execute();
+    $database->delete('lab_migration_solution')->condition('id', $solution_id)->execute();
 
-  $database->delete('lab_migration_solution')
-    ->condition('id', $solution_id)
-    ->execute();
-
-  return TRUE;
+    return TRUE; 
 }
-public function LM_RenameDir($proposal_id, $dir_name)
+  
+  public function LM_RenameDir($proposal_id, $dir_name)
   {
     $query = \Drupal::database()->query("SELECT directory_name FROM lab_migration_proposal WHERE id = :proposal_id", array(
         ':proposal_id' => $proposal_id
