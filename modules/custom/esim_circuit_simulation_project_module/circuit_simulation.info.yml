@@ -1,6 +1,6 @@
 name: 'eSim Circuit Simulation'
 description: 'eSim Project, FOSSEE, IIT Bombay'
 package: FOSSEE
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 type: module
 dependencies: {  }
