@@ -9,7 +9,7 @@ include:
 variables:
   _PHPUNIT_CONCURRENT: 1
   OPT_IN_TEST_NEXT_MAJOR: 1
-  OPT_IN_TEST_PREVIOUS_MAJOR: 1
+  OPT_IN_TEST_PREVIOUS_MAJOR: 0
 
 phpunit (next major):
   allow_failure: true

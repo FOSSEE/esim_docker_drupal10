@@ -28,8 +28,7 @@ use Drupal\flexslider\FlexsliderInterface;
  *     "status" = "status"
  *   },
  *   links = {
- *     "canonical" = "/admin/config/media/flexslider/{flexslider}",
- *     "edit-form" = "/admin/config/media/flexslider/{flexslider}/edit",
+ *     "edit-form" = "/admin/config/media/flexslider/{flexslider}",
  *     "enable" = "/admin/config/media/flexslider/{flexslider}/enable",
  *     "disable" = "/admin/config/media/flexslider/{flexslider}/disable",
  *     "delete-form" = "/admin/config/media/flexslider/{flexslider}/delete",

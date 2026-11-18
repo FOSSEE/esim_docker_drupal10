@@ -1,3 +1,0 @@
-'syslog report configuration':
-  title: 'view syslog report'
-  restrict access: TRUE

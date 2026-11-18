@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\migrate_tools\Functional;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Drupal\Tests\BrowserTestBase;
 use Drush\TestTraits\DrushTestTrait;
 
 /**
  * Execute drush on fully functional website.
- *
- * @group migrate_tools
  */
+#[Group('migrate_tools')]
+#[RunTestsInSeparateProcesses]
 final class DrushCommandsTest extends BrowserTestBase {
   use DrushTestTrait;
 
@@ -116,11 +118,41 @@ final class DrushCommandsTest extends BrowserTestBase {
       ],
       [
         'group' => 'Default (default)',
+        'id' => 'order_gamma',
+        'imported' => 0,
+        'status' => 'Idle',
+        'total' => 1,
+        'unprocessed' => 1,
+        'message_count' => 0,
+        'last_imported' => '',
+      ],
+      [
+        'group' => 'Default (default)',
         'id' => 'source_exception',
         'imported' => 0,
         'status' => 'Idle',
         'total' => 0,
         'unprocessed' => 0,
+        'message_count' => 0,
+        'last_imported' => '',
+      ],
+      [
+        'group' => 'Default (default)',
+        'id' => 'order_beta',
+        'imported' => 0,
+        'status' => 'Idle',
+        'total' => 1,
+        'unprocessed' => 1,
+        'message_count' => 0,
+        'last_imported' => '',
+      ],
+      [
+        'group' => 'Default (default)',
+        'id' => 'order_alpha',
+        'imported' => 0,
+        'status' => 'Idle',
+        'total' => 1,
+        'unprocessed' => 1,
         'message_count' => 0,
         'last_imported' => '',
       ],

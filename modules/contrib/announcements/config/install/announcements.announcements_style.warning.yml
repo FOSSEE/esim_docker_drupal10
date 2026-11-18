@@ -1,6 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: warning
-label: Warning
-extra_classes: warning

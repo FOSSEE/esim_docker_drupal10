@@ -30,13 +30,13 @@ function spambot_help($route_name, RouteMatchInterface $route_match) {
                         It also adds some useful features to help deal with spam accounts.') . '</p>';
       $output .= '<p>' . t('This module works well for sites which require user registration before posting is allowed (which is most forums).') . '</p>';
       $output .= '<h3>' . t('Features') . '</h3>';
-      $output .= '<ul>' . '<li>' . t('Checks (username, email, ip address) data against the www.stopforumspam.com blacklist.') . '</li>';
+      $output .= '<ul><li>' . t('Checks (username, email, ip address) data against the www.stopforumspam.com blacklist.') . '</li>';
       $output .= '<li>' . t('Blacklisting can be based on either of email, username or IP address (with configurable thresholds).') . '</li>';
       $output .= '<li>' . t('Scanning of existing user accounts (via cron).') . '</li>';
       $output .= '<li>' . t('New "spam" tab for user accounts with some useful information and actions.') . '</li>';
       $output .= '<li>' . t('Optionally report accounts as spammers.') . '</li>';
       $output .= '<li>' . t('White lists for IP/email/usernames') . '</li>';
-      $output .= '<li>' . t('Easy integrated to any custom forms (checking only by IP)') . '</li>' . '</ul>';
+      $output .= '<li>' . t('Easy integrated to any custom forms (checking only by IP)') . '</li></ul>';
       $output .= '<p>' . t('If you need more IP address statistics of your users, please consider the User Stats module.') . '</p>';
       return $output;
   }
@@ -210,11 +210,7 @@ function spambot_account_is_spammer($account, $config) {
 
     $ips = spambot_account_ip_addresses($account);
     foreach ($ips as $ip) {
-      // Skip the loopback interface.
-      if ($ip == '127.0.0.1') {
-        continue;
-      }
-      elseif (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6) === FALSE) {
+      if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_NO_PRIV_RANGE) === FALSE) {
         \Drupal::logger('spambot')->notice('Invalid IP address: %ip (uid=%uid, name=%name, email=%email). Spambot will not rely on it',
           [
             '%ip' => $ip,
@@ -335,9 +331,8 @@ function spambot_user_register_form_validate(&$form, &$form_state) {
   }
 
   $ip = \Drupal::request()->getClientIp();
-  if ($ip_threshold > 0 && $ip != '127.0.0.1' && $validation_field_names['ip'] && !spambot_check_whitelist('ip', $config, $ip)) {
-    // Make sure we have a valid IPv4 address (API doesn't support IPv6 yet).
-    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6) === FALSE) {
+  if ($ip_threshold > 0 && $validation_field_names['ip'] && !spambot_check_whitelist('ip', $config, $ip)) {
+    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_NO_PRIV_RANGE) === FALSE) {
       \Drupal::logger('spambot')->notice('Invalid IP address on registration: @ip. Spambot will not rely on it.', ['@ip' => $ip]);
     }
     else {
@@ -613,16 +608,15 @@ function spambot_report_account($account, $ip, $evidence, $key = FALSE) {
       $result = \Drupal::httpClient()->request('POST', $uri, $options);
     }
     catch (Exception $e) {
+      if (str_contains($e->getMessage(), 'duplicate')) {
+        // API server can return a 503 response with a duplicate message
+        // treat this as a success.
+        return TRUE;
+      }
       return FALSE;
     }
     $data = !empty($result) ? $result->getBody()->getContents() : '';
     if (!empty($result->getStatusCode()) && $result->getStatusCode() == 200 && !empty($data) && stripos($data, 'data submitted successfully') !== FALSE) {
-      $success = TRUE;
-    }
-    elseif (stripos($data, 'duplicate') !== FALSE) {
-      // www.stopforumspam.com can return a 503 code
-      // with data = '<p>recent duplicate entry</p>'
-      // which we will treat as successful.
       $success = TRUE;
     }
     else {

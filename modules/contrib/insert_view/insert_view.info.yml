@@ -5,8 +5,3 @@ dependencies:
   - drupal:views
 package: 'Input filters'
 core_version_requirement: ^8.8 || ^9 || ^10 || ^11
-
-# Information added by Drupal.org packaging script on 2025-06-10
-version: '3.0.0'
-project: 'insert_view'
-datestamp: 1749587989

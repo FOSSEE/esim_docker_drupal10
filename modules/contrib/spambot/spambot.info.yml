@@ -6,8 +6,3 @@ core_version_requirement: ^9.3 || ^10 || ^11
 configure: spambot.settings_form
 test_dependencies:
   - webform:webform
-
-# Information added by Drupal.org packaging script on 2024-10-21
-version: '8.x-1.4'
-project: 'spambot'
-datestamp: 1729528877

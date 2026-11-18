@@ -2,8 +2,9 @@
 
 namespace Drupal\flexslider\Form;
 
-use Drupal\Core\Asset\LibraryDiscovery;
+use Drupal\Core\Asset\LibraryDiscoveryInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountProxyInterface;
@@ -19,7 +20,7 @@ class FlexsliderFormSettings extends ConfigFormBase {
   /**
    * The library discovery service.
    *
-   * @var \Drupal\Core\Asset\LibraryDiscovery
+   * @var \Drupal\Core\Asset\LibraryDiscoveryInterface
    */
   private $libraryDiscovery;
 
@@ -35,13 +36,15 @@ class FlexsliderFormSettings extends ConfigFormBase {
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config factory service.
-   * @param \Drupal\Core\Asset\LibraryDiscovery $libraryDiscovery
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typedConfigManager
+   *   The typed config manager.
+   * @param \Drupal\Core\Asset\LibraryDiscoveryInterface $libraryDiscovery
    *   The library discovery service.
    * @param \Drupal\Core\Session\AccountProxyInterface $currentUser
    *   The user account service.
    */
-  public function __construct(ConfigFactoryInterface $configFactory, LibraryDiscovery $libraryDiscovery, AccountProxyInterface $currentUser) {
-    parent::__construct($configFactory);
+  public function __construct(ConfigFactoryInterface $configFactory, TypedConfigManagerInterface $typedConfigManager, LibraryDiscoveryInterface $libraryDiscovery, AccountProxyInterface $currentUser) {
+    parent::__construct($configFactory, $typedConfigManager);
     $this->libraryDiscovery = $libraryDiscovery;
     $this->currentUser = $currentUser;
   }
@@ -54,6 +57,7 @@ class FlexsliderFormSettings extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
+      $container->get('config.typed'),
       $container->get('library.discovery'),
       $container->get('current_user')
     );
@@ -113,7 +117,7 @@ class FlexsliderFormSettings extends ConfigFormBase {
     // Style toggles.
     $form['styles'] = [
       '#type' => 'details',
-      '#title' => $this->t('Syles'),
+      '#title' => $this->t('Styles'),
       '#open' => TRUE,
     ];
 

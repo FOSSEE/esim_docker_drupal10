@@ -65,7 +65,7 @@ class InsertView extends FilterBase implements TrustedCallbackInterface {
    * @param mixed $args
    *   An associative array of arguments.
    * @param string $limit
-   *   The limit to items per page.
+   *   The limit to itens per page.
    *
    * @return array
    *   A renderable array containing the view output
@@ -91,7 +91,7 @@ class InsertView extends FilterBase implements TrustedCallbackInterface {
     if (is_numeric($limit)) {
       $view->setItemsPerPage($limit);
     }
-    return $view->preview($display_id, $args) ?? [];
+    return $view->preview($display_id, $args);
   }
 
   /**

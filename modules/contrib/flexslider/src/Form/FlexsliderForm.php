@@ -211,6 +211,55 @@ class FlexsliderForm extends EntityForm {
       '#default_value' => $options['move'] ?? $default_options['move'],
     ];
 
+    if ($this->moduleHandler->moduleExists('breakpoint')) {
+      /** @var \Drupal\breakpoint\BreakpointManagerInterface $breakpoints_manager */
+      $breakpoints_manager = \Drupal::service('breakpoint.manager');
+      $theme_name = $this->config('system.theme')->get('default');
+      $breakpoints = $breakpoints_manager->getBreakpointsByGroup($theme_name);
+      if (!empty($breakpoints)) {
+        $form['animation_slideshow']['responsive'] = [
+          '#type' => 'details',
+          '#title' => $this->t('Responsive settings (for breakpoints of @theme)',
+            [
+              '@theme' => $theme_name,
+            ]),
+          '#open' => TRUE,
+          '#tree' => TRUE,
+        ];
+
+        foreach ($breakpoints as $breakpoint) {
+          $breakpoint_key = str_replace('.', '_', $breakpoint->getPluginDefinition()['id']);
+          $form['animation_slideshow']['responsive'][$breakpoint_key] = [
+            '#type' => 'details',
+            '#title' => $breakpoint->getLabel() . '(' . $breakpoint->getMediaQuery() . ')',
+          ];
+
+          $form['animation_slideshow']['responsive'][$breakpoint_key]['mediaQuery'] = [
+            '#type' => 'value',
+            '#value' => $breakpoint->getMediaQuery(),
+          ];
+
+          $form['animation_slideshow']['responsive'][$breakpoint_key]['minItems'] = [
+            '#type' => 'number',
+            '#min' => 0,
+            '#step' => 1,
+            '#title' => $this->t('Minimum Items'),
+            '#description' => $this->t('Minimum number of carousel items that should be visible for this breakpoint.'),
+            '#default_value' => $options['responsive'][$breakpoint_key]['minItems'] ?? $options['maxItems'] ?? $default_options['maxItems'],
+          ];
+
+          $form['animation_slideshow']['responsive'][$breakpoint_key]['maxItems'] = [
+            '#type' => 'number',
+            '#min' => 0,
+            '#step' => 1,
+            '#title' => $this->t('Maximum Items'),
+            '#description' => $this->t('Maximum number of carousel items that should be visible for this breakpoint.'),
+            '#default_value' => $options['responsive'][$breakpoint_key]['maxItems'] ?? $options['maxItems'] ?? $default_options['maxItems'],
+          ];
+        }
+      }
+    }
+
     // Navigation and Control Settings.
     $form['nav_controls'] = [
       '#type' => 'details',

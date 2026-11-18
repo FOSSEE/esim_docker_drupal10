@@ -5,12 +5,12 @@ namespace Drupal\Tests\spambot\Kernel;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\DependencyInjection\ServiceModifierInterface;
 use Drupal\KernelTests\KernelTestBase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test of Spambot caching functionality.
- *
- * @group spambot
  */
+#[Group('spambot')]
 class SpambotCacheTest extends KernelTestBase implements ServiceModifierInterface {
 
   /**
