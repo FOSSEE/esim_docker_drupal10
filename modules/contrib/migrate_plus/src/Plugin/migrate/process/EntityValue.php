@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\migrate_plus\Plugin\migrate\process;
 
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
@@ -43,17 +43,19 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * In this example field_foo field value will be retrieved from Spanish
  * translation of the loaded node.
- *
- * @MigrateProcessPlugin(
- *   id = "entity_value",
- * )
  */
+#[MigrateProcess(id: 'entity_value',)]
 class EntityValue extends ProcessPluginBase implements ContainerFactoryPluginInterface {
 
-  protected EntityTypeManagerInterface $entityTypeManager;
+  /**
+   * The field name.
+   */
   protected string $fieldName;
+
+  /**
+   * The language code reference.
+   */
   protected ?string $langCodeRef;
-  protected EntityStorageInterface $entityStorage;
 
   /**
    * Flag indicating whether there are multiple values.
@@ -69,10 +71,9 @@ class EntityValue extends ProcessPluginBase implements ContainerFactoryPluginInt
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager.
    *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @throws \InvalidArgumentException
    */
@@ -80,18 +81,16 @@ class EntityValue extends ProcessPluginBase implements ContainerFactoryPluginInt
     array $configuration,
     $plugin_id,
     $plugin_definition,
-    EntityTypeManagerInterface $entity_type_manager
+    protected EntityTypeManagerInterface $entityTypeManager,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-
-    $this->entityTypeManager = $entity_type_manager;
 
     if (empty($this->configuration['entity_type'])) {
       throw new \InvalidArgumentException("'entity_type' configuration must be specified for the entity_value process plugin.");
     }
 
-    $entity_type = $this->configuration['entity_type'];
-    $this->entityStorage = $this->entityTypeManager->getStorage($entity_type);
+    // Fail early on an unknown entity type.
+    $this->entityTypeManager->getDefinition($this->configuration['entity_type']);
 
     $this->langCodeRef = $this->configuration['langcode'] ?? NULL;
 
@@ -167,8 +166,7 @@ class EntityValue extends ProcessPluginBase implements ContainerFactoryPluginInt
    *   The entities.
    */
   protected function loadEntities(array $ids): array {
-    $entities = $this->entityStorage->loadMultiple($ids);
-    return $entities;
+    return $this->entityTypeManager->getStorage($this->configuration['entity_type'])->loadMultiple($ids);
   }
 
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\migrate_tools;
 
+use Drupal\Component\Utility\DeprecationHelper;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
 use Drupal\Core\StringTranslation\TranslationInterface;
@@ -11,6 +12,7 @@ use Drupal\migrate\MigrateMessage;
 use Drupal\migrate\MigrateMessageInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Plugin\MigrationPluginManagerInterface;
+use Drush\Drush;
 
 /**
  * Defines a migrate executable class for batch migrations through UI.
@@ -37,6 +39,13 @@ class MigrateBatchExecutable extends MigrateExecutable {
    * @var int
    */
   protected int $checkDependencies = 0;
+
+  /**
+   * The specified batch size.
+   *
+   * @var int|float
+   */
+  protected $batchSize = 0;
 
   /**
    * The ID list as single string expression.
@@ -90,6 +99,15 @@ class MigrateBatchExecutable extends MigrateExecutable {
       $this->syncSource = $options['sync'];
     }
 
+    if (isset($options['batch-size'])) {
+      if (isset($options['limit']) && $options['limit'] > 0 && $options['batch-size'] > $options['limit']) {
+        $this->batchSize = $options['limit'];
+      }
+      else {
+        $this->batchSize = $options['batch-size'];
+      }
+    }
+
     if (isset($options['configuration'])) {
       $this->configuration = $options['configuration'];
     }
@@ -132,6 +150,7 @@ class MigrateBatchExecutable extends MigrateExecutable {
       'update' => $this->updateExistingRows,
       'force' => $this->checkDependencies,
       'sync' => $this->syncSource,
+      'batch-size' => $this->batchSize,
       'idlist' => $this->idlistExpression ?: NULL,
       'configuration' => $this->configuration,
     ]);
@@ -184,7 +203,7 @@ class MigrateBatchExecutable extends MigrateExecutable {
         $migration->set('requirements', []);
       }
       else {
-        $dependencies = $migration->getMigrationDependencies();
+        $dependencies = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '11.0.0', fn() => $migration->getMigrationDependencies(), fn() => $migration->getMigrationDependencies(TRUE));
         if (!empty($dependencies['required'])) {
           $required_migrations = $this->migrationPluginManager->createInstances($dependencies['required']);
           // For dependent migrations will need to be migrate all items.
@@ -193,6 +212,7 @@ class MigrateBatchExecutable extends MigrateExecutable {
             'update' => $options['update'],
             'force' => $options['force'],
             'sync' => $options['sync'],
+            'batch-size' => $options['batch-size'],
           ]));
         }
       }
@@ -219,7 +239,6 @@ class MigrateBatchExecutable extends MigrateExecutable {
   public static function batchProcessImport(string $migration_id, array $options, &$context): void {
     if (empty($context['sandbox'])) {
       $context['finished'] = 0;
-      $context['sandbox'] = [];
       $context['sandbox']['total'] = 0;
       $context['sandbox']['counter'] = 0;
       $context['sandbox']['batch_limit'] = 0;
@@ -235,6 +254,19 @@ class MigrateBatchExecutable extends MigrateExecutable {
     // Each batch run we need to reinitialize the counter for the migration.
     if (!empty($options['limit']) && isset($context['results'][$migration->id()]['@numItems'])) {
       $options['limit'] -= $context['results'][$migration->id()]['@numItems'];
+    }
+
+    // If this batch is run via Drush, we need to initialize the progress bar
+    // for the background process.
+    if (PHP_SAPI === 'cli') {
+      $output = Drush::output();
+      $output->setDecorated(TRUE);
+      // Initialize the Symfony Console progress bar.
+      \Drupal::service('migrate_tools.migration_drush_command_progress')->initializeProgress(
+        $output,
+        $migration,
+        $options,
+      );
     }
 
     $executable = new static(
@@ -287,10 +319,7 @@ class MigrateBatchExecutable extends MigrateExecutable {
       $context['sandbox']['counter'] = $context['results'][$migration->id()]['@numItems'];
       if ($context['sandbox']['counter'] <= $context['sandbox']['total']) {
         $context['finished'] = ((float) $context['sandbox']['counter'] / (float) $context['sandbox']['total']);
-        $context['message'] = t('Importing %migration (@percent%).', [
-          '%migration' => $migration->label(),
-          '@percent' => (int) ($context['finished'] * 100),
-        ]);
+        $context['message'] = $executable->progressMessage(FALSE);
       }
     }
 
@@ -330,6 +359,7 @@ class MigrateBatchExecutable extends MigrateExecutable {
         return 0;
       }
     }
+    // @phpstan-ignore-next-line staticMethod.notFound
     $status = parent::checkStatus();
     if ($status === MigrationInterface::RESULT_COMPLETED) {
       // Do some batch housekeeping.
@@ -356,16 +386,17 @@ class MigrateBatchExecutable extends MigrateExecutable {
    *   The batch limit.
    */
   public function calculateBatchLimit($context): float {
-    // @todo Maybe we need some other more sophisticated logic here?
-    return ceil($context['sandbox']['total'] / 100);
+    // Allow batch size to be passed as an absolute number of items to process
+    // per iteration.
+    if ($this->batchSize >= 1) {
+      return (float) $this->batchSize;
+    }
+    // Allow iteration limit to be a percentage of the total number of items,
+    // defaulting to 1% if no size was specified.
+    else {
+      $percentage = $this->batchSize > 0 ? (float) $this->batchSize : 0.01;
+      return ceil($context['sandbox']['total'] * $percentage);
+    }
   }
-
-  /**
-   * Suppress progress messages since we are executing via batch UI.
-   *
-   * @param bool $done
-   *   TRUE if this is the last items to process. Otherwise FALSE.
-   */
-  protected function progressMessage($done = TRUE) {}
 
 }

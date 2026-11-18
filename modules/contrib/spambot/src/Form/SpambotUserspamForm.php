@@ -362,17 +362,11 @@ class SpambotUserspamForm extends FormBase {
     if (!$service_down) {
       $ips = spambot_account_ip_addresses($account);
       foreach ($ips as $ip) {
-        // Skip the loopback interface.
-        if ($ip == '127.0.0.1') {
-          continue;
-        }
-        elseif (spambot_check_whitelist('ip', $config, $ip)) {
+        if (spambot_check_whitelist('ip', $config, $ip)) {
           $whitelist_ips[] = $ip;
           continue;
         }
-        // Make sure we have a valid IPv4 address
-        // (the API doesn't support IPv6 yet).
-        elseif (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) === FALSE) {
+        elseif (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_NO_PRIV_RANGE) === FALSE) {
           $messages[] = [
             'text' => $this->t('Invalid IP address: @ip. Spambot will not rely on it.', ['@ip' => $ip]),
             'type' => 'warning',

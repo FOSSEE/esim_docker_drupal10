@@ -86,9 +86,8 @@ class SpamBotWebformHandler extends WebformHandlerBase {
     }
 
     $ip = $this->request->getClientIp();
-    if ($ip_threshold > 0 && $ip != '127.0.0.1' && !spambot_check_whitelist('ip', $config, $ip)) {
-      // Make sure we have a valid IPv4 address (API doesn't support IPv6 yet).
-      if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6) === FALSE) {
+    if ($ip_threshold > 0 && !spambot_check_whitelist('ip', $config, $ip)) {
+      if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_NO_PRIV_RANGE) === FALSE) {
         $this->getLogger('spambot')->notice(
           'Invalid IP address on webform: @ip. Spambot will not rely on it.', [
             '@ip' => $ip,

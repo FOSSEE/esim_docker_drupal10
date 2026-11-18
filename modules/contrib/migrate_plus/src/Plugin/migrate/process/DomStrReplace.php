@@ -1,10 +1,11 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\migrate_plus\Plugin\migrate\process;
 
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Row;
 
@@ -19,12 +20,13 @@ use Drupal\migrate\Row;
  * - mode: What to modify. Possible values:
  *   - attribute: One element attribute.
  *   - element: An element name.
+ *   - text: The element text content.
  * - xpath: XPath query expression that will produce the \DOMNodeList to walk.
  * - attribute_options: A map of options related to the attribute mode. Required
  *   when mode is attribute. The keys can be:
  *   - name: Name of the attribute to match and modify.
- * - search: pattern to match.
- * - replace: value to replace the searched pattern with.
+ * - search: pattern(s) to match.
+ * - replace: value(s) to replace the searched pattern with.
  * - regex: Use regular expression replacement.
  * - case_insensitive: Case insensitive search. Only valid when regex is false.
  *
@@ -70,14 +72,30 @@ use Drupal\migrate\Row;
  *       search: '/foo-(\d+)/'
  *       replace: 'bar-$1'
  *     -
+ *       plugin: dom_str_replace
+ *       mode: attribute
+ *       xpath: //a
+ *       attribute_options:
+ *         name: href
+ *       regex: true
+ *       search:
+ *         - '/baz-123/'
+ *         - '/baz-456/'
+ *       replace:
+ *         - 'qux-321'
+ *         - 'qux-654'
+ *     -
+ *       plugin: dom_str_replace
+ *       mode: text
+ *       xpath: '//a'
+ *       search: 'Find more information here'
+ *       replace: 'More information'
+ *     -
  *       plugin: dom
  *       method: export
  * @endcode
- *
- * @MigrateProcessPlugin(
- *   id = "dom_str_replace"
- * )
  */
+#[MigrateProcess(id: 'dom_str_replace')]
 class DomStrReplace extends DomProcessBase {
 
   /**
@@ -96,6 +114,7 @@ class DomStrReplace extends DomProcessBase {
           'attribute_options' => NULL,
         ],
         'element' => [],
+        'text' => [],
       ],
       'search' => NULL,
       'replace' => NULL,
@@ -212,41 +231,41 @@ class DomStrReplace extends DomProcessBase {
    *   The string to use a subject on search.
    */
   protected function getSubject(\DOMElement $node): string {
-    switch ($this->configuration['mode']) {
-      case 'attribute':
-        return $node->getAttribute($this->configuration['attribute_options']['name']);
+    return match ($this->configuration['mode']) {
+      'attribute' => $node->getAttribute($this->configuration['attribute_options']['name']),
+      'element' => $node->nodeName,
+      'text' => $node->textContent,
+      default => '',
+    };
 
-      case 'element':
-        return $node->nodeName;
-    }
   }
 
   /**
    * Retrieves the right search string based on configuration.
    *
-   * @return string
-   *   The value to be searched.
+   * @return string|array
+   *   The value(s) to be searched.
    */
-  protected function getSearch(): string {
-    switch ($this->configuration['mode']) {
-      case 'attribute':
-      case 'element':
-        return $this->configuration['search'];
-    }
+  protected function getSearch(): string|array {
+    return match ($this->configuration['mode']) {
+      'attribute', 'element', 'text' => $this->configuration['search'],
+      default => '',
+    };
+
   }
 
   /**
    * Retrieves the right replace string based on configuration.
    *
-   * @return string
-   *   The value to use for replacement.
+   * @return string|array
+   *   The value(s) to use for replacement.
    */
-  protected function getReplace(): string {
-    switch ($this->configuration['mode']) {
-      case 'attribute':
-      case 'element':
-        return $this->configuration['replace'];
-    }
+  protected function getReplace(): string|array {
+    return match ($this->configuration['mode']) {
+      'attribute', 'element', 'text' => $this->configuration['replace'],
+      default => '',
+    };
+
   }
 
   /**
@@ -254,14 +273,14 @@ class DomStrReplace extends DomProcessBase {
    *
    * @param \DOMElement $html_node
    *   The current element from iteration.
-   * @param string $search
-   *   The search string or pattern.
-   * @param string $replace
-   *   The replacement string.
+   * @param string|array $search
+   *   The search string(s) or pattern(s).
+   * @param string|array $replace
+   *   The replacement string(s).
    * @param string $subject
    *   The string on which to perform the substitution.
    */
-  protected function doReplace(\DOMElement $html_node, string $search, string $replace, string $subject): void {
+  protected function doReplace(\DOMElement $html_node, string|array $search, string|array $replace, string $subject): void {
     if ($this->configuration['regex']) {
       $function = 'preg_replace';
     }
@@ -298,6 +317,10 @@ class DomStrReplace extends DomProcessBase {
           $new_node->setAttribute($attribute->name, $attribute->value);
         }
         $html_node->parentNode->replaceChild($new_node, $html_node);
+        break;
+
+      case 'text':
+        $html_node->textContent = $new_subject;
         break;
     }
   }

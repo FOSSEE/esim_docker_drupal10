@@ -6,20 +6,19 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\DependencyInjection\ServiceModifierInterface;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\user\Entity\User;
+use Drupal\user\UserInterface;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test spambot report account.
- *
- * @group spambot
  */
+#[Group('spambot')]
 class SpambotUserspamTest extends KernelTestBase implements ServiceModifierInterface {
 
   /**
    * User for tests.
-   *
-   * @var \Drupal\Core\Entity\EntityBase|\Drupal\Core\Entity\EntityInterface
    */
-  protected $user;
+  protected UserInterface $user;
 
   /**
    * {@inheritdoc}

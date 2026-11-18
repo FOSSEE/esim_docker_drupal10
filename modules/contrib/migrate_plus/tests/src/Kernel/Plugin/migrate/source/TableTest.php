@@ -1,20 +1,24 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\Tests\migrate_plus\Kernel\Plugin\migrate\source;
 
 use Drupal\migrate\Exception\RequirementsException;
-use Drupal\Tests\migrate_drupal\Kernel\d7\MigrateDrupal7TestBase;
+use Drupal\migrate_plus\Plugin\migrate\source\Table;
+use Drupal\Tests\migrate\Kernel\MigrateTestBase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests Table source plugin.
- *
- * @covers \Drupal\migrate_plus\Plugin\migrate\source\Table
- *
- * @group migrate_plus
  */
-final class TableTest extends MigrateDrupal7TestBase {
+#[CoversClass(Table::class)]
+#[Group('migrate_plus')]
+#[RunTestsInSeparateProcesses]
+final class TableTest extends MigrateTestBase {
 
   /**
    * {@inheritdoc}
@@ -31,14 +35,14 @@ final class TableTest extends MigrateDrupal7TestBase {
   /**
    * Definition of a test migration.
    */
-  protected ?array $migrationDefinition;
+  protected ?array $migrationDefinition = NULL;
 
   /**
    * {@inheritdoc}
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->migrationPluginManager = \Drupal::service('plugin.manager.migration');
+    $this->migrationPluginManager = $this->container->get('plugin.manager.migration');
 
     $this->migrationDefinition = [
       'id' => 'test',
@@ -68,10 +72,9 @@ final class TableTest extends MigrateDrupal7TestBase {
   }
 
   /**
-   * Test 'Table' source plugin constructor with invalid configuration.
-   *
-   * @dataProvider badConfigurationProvider
+   * Test 'table' source plugin constructor with invalid configuration.
    */
+  #[DataProvider('badConfigurationProvider')]
   public function testTableBadConfiguration(array $configuration, string $message): void {
     $this->expectException(\InvalidArgumentException::class);
     $this->expectExceptionMessage($message);

@@ -1,7 +1,0 @@
-announcements.structure:
-  path: '/admin/structure/announcements'
-  defaults:
-    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
-    _title: 'Structure'
-  requirements:
-    _permission: 'access administration pages'

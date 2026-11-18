@@ -37,6 +37,9 @@ migrate_plus.migration.*:
     destination:
       type: ignore
       label: 'Destination'
+    idMap:
+      type: migrate_plus.id_map.[plugin]
+      label: 'Id Map'
     migration_dependencies:
       type: mapping
       label: 'Dependencies'
@@ -53,6 +56,9 @@ migrate_plus.migration.*:
           sequence:
             type: string
             label: 'Dependency'
+
+migrate_plus.migration.*.third_party.modeler_api:
+  type: model_settings.third_party.modeler_api
 
 migrate_plus.migration_group.*:
   type: config_entity
