@@ -1,0 +1,147 @@
+<?php
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Extension\CoreExtension;
+use Twig\Extension\SandboxExtension;
+use Twig\MacroNamespace;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedTagError;
+use Twig\Sandbox\SecurityNotAllowedFilterError;
+use Twig\Sandbox\SecurityNotAllowedFunctionError;
+use Twig\Sandbox\SecurityNotAllowedTestError;
+use Twig\Source;
+use Twig\Template;
+use Twig\TemplateWrapper;
+
+/* themes/contrib/nava/templates/block/block--page-title-block.html.twig */
+class __TwigTemplate_a04bc845517190aa7a307bda1c1f59ee extends Template
+{
+    private Source $source;
+    /**
+     * @var array<string, MacroNamespace>
+     */
+    private array $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        $this->sandbox = $env->getExtension(SandboxExtension::class)->getChecker();
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->parent = false;
+
+        $this->blocks = [
+        ];
+    }
+
+    protected function doDisplay(array $context, array $blocks = []): iterable
+    {
+        $macros = $this->macros;
+        // line 34
+        yield "
+";
+        // line 36
+        $context["classes"] = ["block", "block-page-title"];
+        // line 41
+        yield "
+<div";
+        // line 42
+        yield (string) $this->extensions['Drupal\Core\Template\TwigExtension']->escapeFilter($this->env, CoreExtension::getAttribute($this->env, $this->source, ($context["attributes"] ?? null), "addClass", [($context["classes"] ?? null)], "method", false, false, true, 42), "html", null, true);
+        yield ">
+  ";
+        // line 43
+        yield (string) $this->extensions['Drupal\Core\Template\TwigExtension']->escapeFilter($this->env, ($context["title_prefix"] ?? null), "html", null, true);
+        yield "
+  ";
+        // line 44
+        yield (string) $this->extensions['Drupal\Core\Template\TwigExtension']->escapeFilter($this->env, ($context["content"] ?? null), "html", null, true);
+        yield "
+  ";
+        // line 45
+        yield (string) $this->extensions['Drupal\Core\Template\TwigExtension']->escapeFilter($this->env, ($context["title_suffix"] ?? null), "html", null, true);
+        yield "
+</div>
+";
+        $this->env->getExtension('\Drupal\Core\Template\TwigExtension')
+            ->checkDeprecations($context, ["attributes", "title_prefix", "content", "title_suffix"]);        return; yield;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getTemplateName(): string
+    {
+        return "themes/contrib/nava/templates/block/block--page-title-block.html.twig";
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function isTraitable(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getDefaultEscapeStrategy(): string|false
+    {
+        return "html";
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getDebugInfo(): array
+    {
+        return array (  65 => 45,  61 => 44,  57 => 43,  53 => 42,  50 => 41,  48 => 36,  45 => 34,);
+    }
+
+    public function getSourceContext(): Source
+    {
+        return new Source("", "themes/contrib/nava/templates/block/block--page-title-block.html.twig", "/var/www/html/ESIM-content-drupal10-9dec/themes/contrib/nava/templates/block/block--page-title-block.html.twig");
+    }
+    
+    public function ensureSecurityChecked(): void
+    {
+        if ($this->sandbox->isSandboxed($this->source)) {
+            $this->checkSecurity();
+        }
+    }
+    
+    public function checkSecurity()
+    {
+        static $tags = ["set" => 36];
+        static $filters = ["escape" => 42];
+        static $functions = [];
+        static $tests = [];
+
+        try {
+            $this->sandbox->checkSecurity(
+                [0 => "set"],
+                [0 => "escape"],
+                [],
+                [],
+                $this->source
+            );
+        } catch (SecurityError $e) {
+            if ($e instanceof SecurityNotAllowedTagError && isset($tags[$e->getTagName()])) {
+                $e->setTemplateLine($tags[$e->getTagName()]);
+            } elseif ($e instanceof SecurityNotAllowedFilterError && isset($filters[$e->getFilterName()])) {
+                $e->setTemplateLine($filters[$e->getFilterName()]);
+            } elseif ($e instanceof SecurityNotAllowedFunctionError && isset($functions[$e->getFunctionName()])) {
+                $e->setTemplateLine($functions[$e->getFunctionName()]);
+            } elseif ($e instanceof SecurityNotAllowedTestError && isset($tests[$e->getTestName()])) {
+                $e->setTemplateLine($tests[$e->getTestName()]);
+            }
+
+            throw $e;
+        }
+
+    }
+}
